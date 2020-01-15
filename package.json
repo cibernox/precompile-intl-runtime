@@ -1,0 +1,24 @@
+{
+  "name": "icu-helpers",
+  "version": "0.0.1",
+  "description": "Functional helpers for ICU functions",
+  "repository": "",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest test"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "dependencies": {
+  },
+  "keywords": [
+    "babel-plugin",
+    "ICU"
+  ],
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
+}
