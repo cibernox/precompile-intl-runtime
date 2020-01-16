@@ -24,11 +24,11 @@ export function setLocale(locale) {
   currentLocale = locale;
 }
 
-export function addMessage(locale, messages) {
+export function addMessages(locale, messages) {
   MESSAGES[locale] = messages;
 }
 
-export function lookupMessage(key) {
+export function lookupMessage(key, locale = currentLocale) {
   return MESSAGES[currentLocale][key];
 }
 
