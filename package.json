@@ -18,6 +18,8 @@
     "ICU"
   ],
   "devDependencies": {
+    "@babel/preset-env": "^7.0.0",
+    "babel-jest": "^24.9.0",
     "jest": "^24.9.0"
   }
 }

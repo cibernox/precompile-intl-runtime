@@ -1,11 +1,11 @@
 const MESSAGES = {};
 let currentLocale;
 export function __plural(value, opts) {
-  return `pluralized ${value}!`;
+  return opts[value] || opts['other'];
 }
 
-export function __select(value, options) {
-  return `selected ${value}!`;
+export function __select(value, opts) {
+  return opts[value] || opts['other'];
 }
 
 export function __number(value, style) {
