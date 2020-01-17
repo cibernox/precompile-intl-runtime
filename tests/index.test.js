@@ -74,11 +74,9 @@ describe("addMessages", function() {
   it("updates the `dictionary` and `locales` observables", () => {
     expect.assertions(2);
     let unsubscribe = locales.subscribe(locales => {
-      debugger;
       expect(locales).toStrictEqual(["es"]);
     });
     let unsubscribe2 = dictionary.subscribe(messages => {
-      debugger;
       expect(messages["es"]).toStrictEqual({ salute: "Hola" });
     });
     addMessages('es', { salute: 'Hola' });

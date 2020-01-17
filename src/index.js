@@ -15,7 +15,6 @@ class WritableStore {
     this._subscribers.forEach(fn => fn(v));
   }
   update(cb) {
-    debugger;
     this._value = cb(this._value);
     this._subscribers.forEach(fn => fn(this._value));
   }
