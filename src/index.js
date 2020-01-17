@@ -9,9 +9,6 @@ class WritableStore {
     this._subscribers.push(fn);
     return () => this._subscribers.splice(this._subscribers.indexOf(fn), 1);
   }
-  get() {
-    return this._value;
-  }
   set(v) {
     this._value = v;
     this._subscribers.forEach(fn => fn(v));
@@ -54,7 +51,7 @@ export function addMessages(locale, messages) {
   MESSAGES[locale] = messages;
 }
 
-export function lookupMessage(key, locale = currentLocale.get()) {
+export function lookupMessage(key, locale = currentLocale._value) {
   return MESSAGES[locale][key];
 }
 
