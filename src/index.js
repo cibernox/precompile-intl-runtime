@@ -58,6 +58,9 @@ const defaultOptions = {
   warnOnMissingMessages: true
 };
 const options = defaultOptions;
+function getOptions().formats {
+  return options;
+}
 const getFromQueryString = (queryString, key) => {
   const keyVal = queryString.split("&").find(i => i.indexOf(`${key}=`) === 0);
 
@@ -155,21 +158,21 @@ export function __select(value, opts) {
 }
 
 export function __number(value, style) {
-  let formatterOpts = options.formats.number[style] || {}
+  let formatterOpts = getOptions().formats.number[style] || {}
   return new Intl.NumberFormat(currentLocale._value, formatterOpts).format(
     value
   );
 }
 
 export function __date(value, style = "short") {
-  let formatterOpts = options.formats.date[style] || {};
+  let formatterOpts = getOptions().formats.date[style] || {};
   return new Intl.DateTimeFormat(currentLocale._value, formatterOpts).format(
     value
   );
 }
 
 export function __time(value, style = "short") {
-  let formatterOpts = options.formats.time[style] || {};
+  let formatterOpts = getOptions().formats.time[style] || {};
   return new Intl.DateTimeFormat(currentLocale._value, formatterOpts).format(
     value
   );
