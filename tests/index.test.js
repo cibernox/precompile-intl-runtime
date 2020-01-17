@@ -1,4 +1,4 @@
-import { __interpolate, __plural, __select } from "../src";
+import { __interpolate, __plural, __select, currentLocale } from "../src";
 
 describe('__interpolate', function() {
   it("interpolate values bug ignores null, false and undefined", () => {
@@ -25,4 +25,33 @@ describe('__select', function() {
     expect(__select('female', { male: 'He', female: 'She', other: 'They' })).toBe('She');
     expect(__select('animal', { male: 'He', female: 'She', other: 'They' })).toBe('They');
   });
+});
+
+describe('currentLocale', function() {
+  it('behaves like an observable', () => {
+    expect.assertions(2);
+    let unsubscribe = currentLocale.subscribe(locale => {
+      expect(locale).toBe('es-ES');
+    });
+    let unsubscribe2 = currentLocale.subscribe(locale => {
+      expect(locale).toBe('es-ES');
+    });
+    currentLocale.set('es-ES');
+    unsubscribe();
+    unsubscribe2();
+  });
+
+  it('can be cleared', () => {
+    expect.assertions(0); // no subscribers are notified because the store is cleared before receiving a value
+    let unsubscribe = currentLocale.subscribe(locale => {
+      expect(locale).toBe('es-ES');
+    });
+    let unsubscribe2 = currentLocale.subscribe(locale => {
+      expect(locale).toBe('es-ES');
+    });
+    currentLocale.clear();
+    currentLocale.set("es-ES");
+    unsubscribe();
+    unsubscribe2();
+  })
 });
