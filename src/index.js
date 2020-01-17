@@ -145,12 +145,16 @@ export function init(opts) {
   return currentLocale.set(initialLocale);
 }
 
+function getLocalPluralFor(v) {
+  return new Intl.PluralRules(currentLocale._value).select(v);
+}
+
 export function __interpolate(value) {
   return value === 0 ? 0 : value || '';
 }
 
 export function __plural(value, opts) {
-  return opts[value] || opts['other'];
+  return opts[value] || opts[getLocalPluralFor(value)] || "";
 }
 
 export function __select(value, opts) {

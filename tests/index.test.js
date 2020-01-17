@@ -26,10 +26,33 @@ describe('__interpolate', function() {
 });
 
 describe('__plural', function() {
-  it("works", () => {
-    expect(__plural(0, { 0: 'cats', 1: 'cat', other: 'cats' })).toBe('cats');
-    expect(__plural(1, { 0: 'cats', 1: 'cat', other: 'cats' })).toBe('cat');
-    expect(__plural(2, { 0: 'cats', 1: 'cat', other: 'cats' })).toBe('cats');
+  it("works respecting the pluralization rules of the current locale", () => {
+    currentLocale.set('en-US');
+    let pluralizations = {
+      zero: "no cats",
+      one: "one cat",
+      two: "a couple cats",
+      3: "a triplet of cats",  // a specific translation for 3 that trups over
+      few: "a few cats",
+      many: "many cats",
+      other: "other cats"
+    };
+    expect(__plural(0, pluralizations)).toBe('other cats'); // english has no zero pluralization
+    expect(__plural(1, pluralizations)).toBe('one cat');
+    expect(__plural(2, pluralizations)).toBe('other cats');
+    expect(__plural(3, pluralizations)).toBe('a triplet of cats');
+    expect(__plural(6, pluralizations)).toBe('other cats');
+    expect(__plural(18, pluralizations)).toBe('other cats');
+    expect(__plural(200, pluralizations)).toBe('other cats');
+
+    currentLocale.set("ar-EG"); // arabic has a lot of different categories for
+    expect(__plural(0, pluralizations)).toBe('no cats');
+    expect(__plural(1, pluralizations)).toBe('one cat');
+    expect(__plural(2, pluralizations)).toBe('a couple cats');
+    expect(__plural(3, pluralizations)).toBe("a triplet of cats");
+    expect(__plural(6, pluralizations)).toBe('a few cats');
+    expect(__plural(18, pluralizations)).toBe('many cats');
+    expect(__plural(200, pluralizations)).toBe('other cats');
   });
 });
 
