@@ -58,7 +58,7 @@ const defaultOptions = {
   warnOnMissingMessages: true
 };
 const options = defaultOptions;
-function getOptions().formats {
+function getOptions() {
   return options;
 }
 const getFromQueryString = (queryString, key) => {
