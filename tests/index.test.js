@@ -1,4 +1,18 @@
-import { __interpolate, __plural, __select, currentLocale } from "../src";
+import {
+  __interpolate,
+  __plural,
+  __select,
+  addMessages,
+  currentLocale,
+  dictionary,
+  locales
+} from "../src";
+
+beforeEach(() => {
+  currentLocale.clear();
+  dictionary.clear();
+  locales.clear();
+});
 
 describe('__interpolate', function() {
   it("interpolate values bug ignores null, false and undefined", () => {
@@ -54,4 +68,21 @@ describe('currentLocale', function() {
     unsubscribe();
     unsubscribe2();
   })
+});
+
+describe("addMessages", function() {
+  it("updates the `dictionary` and `locales` observables", () => {
+    expect.assertions(2);
+    let unsubscribe = locales.subscribe(locales => {
+      debugger;
+      expect(locales).toStrictEqual(["es"]);
+    });
+    let unsubscribe2 = dictionary.subscribe(messages => {
+      debugger;
+      expect(messages["es"]).toStrictEqual({ salute: "Hola" });
+    });
+    addMessages('es', { salute: 'Hola' });
+    unsubscribe();
+    unsubscribe2();
+  });
 });

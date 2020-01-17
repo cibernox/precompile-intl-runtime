@@ -1,8 +1,9 @@
-const MESSAGES = {};
+// const MESSAGES = {};
 // This was a svelte-only library, it could be a writable store
 class WritableStore {
   constructor(v) {
-    this._value = v;
+    this._initialValue = v;
+    this._value = this._initialValue;
     this._subscribers = [];
   }
   subscribe(fn) {
@@ -14,14 +15,18 @@ class WritableStore {
     this._subscribers.forEach(fn => fn(v));
   }
   update(cb) {
+    debugger;
     this._value = cb(this._value);
+    this._subscribers.forEach(fn => fn(this._value));
   }
   clear() {
-    this._value = undefined;
+    this._value = this._initialValue;
     this._subscribers = [];
   }
 }
 export const currentLocale = new WritableStore();
+export const locales = new WritableStore([]);
+export const dictionary = new WritableStore({});
 
 export function __interpolate(value) {
   return value === 0 ? 0 : value || '';
@@ -48,10 +53,18 @@ export function __time(value, style) {
 }
 
 export function addMessages(locale, messages) {
-  MESSAGES[locale] = messages;
+  let localeExisted;
+  dictionary.update(value => {
+    localeExisted = value.hasOwnProperty(locale);
+    value[locale] = Object.assign(value[locale] || {}, messages);
+    return value;
+  });
+  if (!localeExisted) {
+    locales.update(value => [locale, ...value]);
+  }
 }
 
 export function lookupMessage(key, locale = currentLocale._value) {
-  return MESSAGES[locale][key];
+  return dictionary._value[locale][key];
 }
 
