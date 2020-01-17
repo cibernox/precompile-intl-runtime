@@ -1,7 +1,7 @@
 declare module "icu-helpers" {
   type MessageFn = (...args: any) => string
   interface WritableStore {
-    subscribe: (fn: () => {}) => () => {}
+    subscribe: (v: any) => () => {}
     set(v: any): void
     update(cb: () => {}): void
     clear(): void
