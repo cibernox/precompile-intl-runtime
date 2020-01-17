@@ -139,7 +139,7 @@ export function init(opts) {
     }
   }
 
-  return locale.set(initialLocale)
+  return currentLocale.set(initialLocale);
 }
 
 export function __interpolate(value) {
