@@ -9,9 +9,9 @@ import {
 } from "../src";
 
 beforeEach(() => {
-  currentLocale.clear();
-  dictionary.clear();
-  locales.clear();
+  currentLocale.set(undefined);
+  dictionary.set({});
+  locales.set([]);
 });
 
 describe('__interpolate', function() {
@@ -54,20 +54,6 @@ describe('currentLocale', function() {
     unsubscribe();
     unsubscribe2();
   });
-
-  it('can be cleared', () => {
-    expect.assertions(0); // no subscribers are notified because the store is cleared before receiving a value
-    let unsubscribe = currentLocale.subscribe(locale => {
-      expect(locale).toBe('es-ES');
-    });
-    let unsubscribe2 = currentLocale.subscribe(locale => {
-      expect(locale).toBe('es-ES');
-    });
-    currentLocale.clear();
-    currentLocale.set("es-ES");
-    unsubscribe();
-    unsubscribe2();
-  })
 });
 
 describe("addMessages", function() {
