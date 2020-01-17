@@ -1,4 +1,15 @@
-import { __plural, __select } from "../src";
+import { __interpolate, __plural, __select } from "../src";
+
+describe('__interpolate', function() {
+  it("interpolate values bug ignores null, false and undefined", () => {
+    expect(__interpolate(0)).toBe(0);
+    expect(__interpolate(null)).toBe('');
+    expect(__interpolate(false)).toBe('');
+    expect(__interpolate(undefined)).toBe('');
+    expect(__interpolate(1)).toBe(1);
+    expect(__interpolate('foo')).toBe('foo');
+  });
+});
 
 describe('__plural', function() {
   it("works", () => {

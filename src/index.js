@@ -1,5 +1,9 @@
 const MESSAGES = {};
 let currentLocale;
+export function __interpolate(value) {
+  return value === 0 ? 0 : value || '';
+}
+
 export function __plural(value, opts) {
   return opts[value] || opts['other'];
 }
