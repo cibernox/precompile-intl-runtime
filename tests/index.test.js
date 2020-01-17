@@ -42,29 +42,46 @@ describe('__select', function() {
 });
 
 describe('currentLocale', function() {
-  it('behaves like an observable', () => {
+  it('subscribes get notified when its value is updated', () => {
     expect.assertions(2);
+    let earlyExit = true;
     let unsubscribe = currentLocale.subscribe(locale => {
+      if (earlyExit) return;
       expect(locale).toBe('es-ES');
     });
     let unsubscribe2 = currentLocale.subscribe(locale => {
+      if (earlyExit) return;
       expect(locale).toBe('es-ES');
     });
+    earlyExit = false;
     currentLocale.set('es-ES');
     unsubscribe();
     unsubscribe2();
+  });
+
+  it('subscribers get immediately invoked', function() {
+    expect.assertions(1);
+    currentLocale.set("fr-Fr");
+    let unsubscribe = currentLocale.subscribe(locale => {
+      expect(locale).toBe("fr-Fr");
+    });
+    unsubscribe();
   });
 });
 
 describe("addMessages", function() {
   it("updates the `dictionary` and `locales` observables", () => {
     expect.assertions(2);
+    let earlyExit = true;
     let unsubscribe = locales.subscribe(locales => {
+      if (earlyExit) return;
       expect(locales).toStrictEqual(["es"]);
     });
     let unsubscribe2 = dictionary.subscribe(messages => {
+      if (earlyExit) return;
       expect(messages["es"]).toStrictEqual({ salute: "Hola" });
     });
+    earlyExit = false;
     addMessages('es', { salute: 'Hola' });
     unsubscribe();
     unsubscribe2();

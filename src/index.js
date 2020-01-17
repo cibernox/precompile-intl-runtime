@@ -7,6 +7,7 @@ class WritableStore {
   }
   subscribe(fn) {
     this._subscribers.push(fn);
+    fn(this._value);
     return () => this._subscribers.splice(this._subscribers.indexOf(fn), 1);
   }
   set(v) {
