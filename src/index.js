@@ -153,8 +153,12 @@ export function __interpolate(value) {
   return value === 0 ? 0 : value || '';
 }
 
-export function __plural(value, opts) {
-  return opts[value] || opts[getLocalPluralFor(value)] || "";
+export function __plural(value, offsetOrOptions, opts) {
+  if (typeof offsetOrOptions === 'number') {
+    return opts[value] || opts[getLocalPluralFor(value - offsetOrOptions)] || "";
+  } else {
+    return offsetOrOptions[value] || offsetOrOptions[getLocalPluralFor(value)] || "";
+  }
 }
 
 export function __select(value, opts) {

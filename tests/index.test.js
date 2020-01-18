@@ -54,6 +54,20 @@ describe('__plural', function() {
     expect(__plural(18, pluralizations)).toBe('many cats');
     expect(__plural(200, pluralizations)).toBe('other cats');
   });
+
+  it('supports receiving an offset as second argument', function() {
+    let translation = trainers => __plural(trainers, 1, {
+      0: "The gym is empty",
+      1: "You are alone here",
+      one: `You and ${trainers - 1} trainer`,
+      other: `You and ${trainers - 1} other trainers`
+    });
+
+    expect(translation(0)).toBe("The gym is empty");
+    expect(translation(1)).toBe("You are alone here");
+    expect(translation(2)).toBe("You and 1 trainer");
+    expect(translation(3)).toBe("You and 2 other trainers");
+  });
 });
 
 describe('__select', function() {
