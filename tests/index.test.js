@@ -2,10 +2,14 @@ import {
   __interpolate,
   __plural,
   __select,
+  __date,
+  __time,
+  __number,
   addMessages,
   currentLocale,
   dictionary,
-  locales
+  locales,
+  init
 } from "../src";
 
 beforeEach(() => {
@@ -75,6 +79,84 @@ describe('__select', function() {
     expect(__select('male', { male: 'He', female: 'She', other: 'They' })).toBe('He');
     expect(__select('female', { male: 'He', female: 'She', other: 'They' })).toBe('She');
     expect(__select('animal', { male: 'He', female: 'She', other: 'They' })).toBe('They');
+  });
+});
+
+describe('formatters', function() {
+  beforeEach(() => {
+    init({
+      fallbackLocale: "en",
+      initialLocale: "en-US", // in node by default only the en-US language is available.
+      formats: {
+        number: {
+          eur: { style: "currency", currency: 'EUR' }
+        },
+        date: {
+          "abbr-full": { weekday: "long", month: "short", day: "numeric" }
+        },
+        time: {
+          hour: { hour: "numeric" }
+        }
+      }
+    });
+  });
+
+  describe('__date', function() {
+    it('formats dates on the "short" format by default', function() {
+      let wedding = new Date('2013-10-18')
+      expect(__date(wedding)).toBe("10/18/13"); // 10/18/13
+    });
+
+    it('accepts "short", "medium", "long" and "full" as second argument', function() {
+      let wedding = new Date('2013-10-18');
+      expect(__date(wedding, 'short')).toBe("10/18/13");
+      expect(__date(wedding, "medium")).toBe("Oct 18, 2013");
+      expect(__date(wedding, "long")).toBe("October 18, 2013");
+      expect(__date(wedding, "full")).toBe("Friday, October 18, 2013");
+    });
+
+    it('accepts custom formats preconfigured when the library was initialized', function() {
+      let wedding = new Date('2013-10-18');
+      expect(__date(wedding, 'full-abbr')).toBe("10/18/2013"); // Like the "short" but with YYYY
+    });
+  });
+
+
+  describe("__time", function() {
+    it('formats times on the "short" format by default', function() {
+      let wedding = new Date(Date.UTC(2013, 11, 18, 19, 13, 50));
+      expect(__time(wedding)).toBe("8:13 PM");
+    });
+
+    it('accepts "short", "medium", "long" and "full" as second argument', function() {
+      let wedding = new Date(Date.UTC(2013, 11, 18, 19, 13, 50));
+      expect(__time(wedding, "short")).toBe("8:13 PM");
+      expect(__time(wedding, "medium")).toBe("8:13:50 PM");
+      expect(__time(wedding, "long")).toBe("8:13:50 PM GMT+1");
+      expect(__time(wedding, "full")).toBe("8:13:50 PM GMT+1");
+    });
+
+    it("accepts custom formats preconfigured when the library was initialized", function() {
+      let wedding = new Date(Date.UTC(2013, 11, 18, 19, 13, 50));
+      expect(__time(wedding, "hour")).toBe("8 PM");
+    });
+  });
+
+  describe("__number", function() {
+    it('formats numbers in the current\'s locale way', function() {
+      expect(__number(12345678)).toBe("12,345,678");
+    });
+
+    it('accepts "scientific", "engineering", "compactLong" and "compactShort" as second argument', function() {
+      expect(__number(12345678, "scientific")).toBe("1.235E7");
+      expect(__number(12345678, "engineering")).toBe("12.346E6");
+      expect(__number(12345678, "compactLong")).toBe("12 million");
+      expect(__number(12345678, "compactShort")).toBe("12M");
+    });
+
+    it("accepts custom formats preconfigured when the library was initialized", function() {
+      expect(__number(12345678, "eur")).toBe("€12,345,678.00");
+    });
   });
 });
 
