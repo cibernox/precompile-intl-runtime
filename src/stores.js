@@ -26,3 +26,6 @@ export const locales = new WritableStore([]);
 dictionary.subscribe(dict => {
   locales.set(Object.keys(dict));
 });
+export function getCurrentLocale() {
+  return currentLocale._value;
+}

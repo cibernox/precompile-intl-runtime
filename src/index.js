@@ -1,7 +1,15 @@
 
 import { init } from "./config";
-import { formatterOptions, getNumberFormatter, getDateFormatter, getTimeFormatter } from "./formatters";
 import { currentLocale, dictionary, locales } from './stores';
+import {
+  // formatterOptions,
+  getNumberFormatter,
+  getDateFormatter,
+  getTimeFormatter,
+  formatTime,
+  formatDate,
+  formatNumber
+} from "./formatters";
 
 export function __interpolate(value) {
   return value === 0 ? 0 : value || '';
@@ -24,25 +32,16 @@ export function __select(value, opts) {
   return opts[value] || opts['other'];
 }
 
-export function __number(value, style) {
-  return getNumberFormatter(
-    currentLocale._value,
-    formatterOptions("number", style)
-  ).format(value);
+export function __number(value, format) {
+  return formatNumber(value, { format });
 }
 
-export function __date(value, style = "short") {
-  return getDateFormatter(
-    currentLocale._value,
-    formatterOptions("date", style)
-  ).format(value);
+export function __date(value, format = "short") {
+  return formatDate(value, { format });
 }
 
-export function __time(value, style = "short") {
-  return getTimeFormatter(
-    currentLocale._value,
-    formatterOptions("time", style)
-  ).format(value);
+export function __time(value, format = "short") {
+  return formatTime(value, { format });
 }
 
 export function addMessages(locale, messages) {
@@ -63,5 +62,8 @@ export {
   locales,
   getNumberFormatter,
   getDateFormatter,
-  getTimeFormatter
+  getTimeFormatter,
+  formatTime,
+  formatDate,
+  formatNumber
 };

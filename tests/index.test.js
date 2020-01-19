@@ -113,7 +113,7 @@ describe('__date', function() {
 
   it('accepts custom formats preconfigured when the library was initialized', function() {
     let wedding = new Date('2013-10-18');
-    expect(__date(wedding, 'full-abbr')).toBe("10/18/2013"); // Like the "short" but with YYYY
+    expect(__date(wedding, "abbr-full")).toBe("Friday, Oct 18");
   });
 });
 
