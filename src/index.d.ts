@@ -13,4 +13,7 @@ declare module "icu-helpers" {
   declare function setLocale(locale: string): void
   declare function lookupMessage(key: string, locale?: string): string | MessageFn
   declare function init(Record): void
+  declare function getDateFormatter(locale: string, opts: Record)
+  declare function getNumberFormatter(locale: string, opts: Record)
+  declare function getTimeFormatter(locale: string, opts: Record)
 }
