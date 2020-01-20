@@ -1,8 +1,12 @@
 {
-  "name": "icu-helpers",
+  "name": "precompile-intl-runtime",
   "version": "0.0.1",
-  "description": "Functional helpers for ICU functions",
+  "description": "Runtime helpers to be used in translations precompiled by babel-plugin-precompile-intl",
   "repository": "",
+  "author": {
+    "name": "Miguel Camba",
+    "email": "miguel.camba@gmail.com"
+  },
   "license": "MIT",
   "scripts": {
     "build": "tsc",
@@ -12,8 +16,10 @@
   "types": "dist/index.d.ts",
   "dependencies": {},
   "keywords": [
-    "babel-plugin",
-    "ICU"
+    "helpers",
+    "Intl",
+    "precompile",
+    "runtime"
   ],
   "devDependencies": {
     "@babel/preset-env": "^7.0.0",
