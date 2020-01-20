@@ -1,10 +1,6 @@
 import { getCurrentLocale } from './stores/locale';
 import { getOptions } from './configs';
 import { flush } from './includes/loaderQueue';
-// defineMessages allow us to define and extract dynamic message ids
-export function defineMessages(i) {
-    return i;
-}
 export function waitLocale(locale) {
     return flush(locale || getCurrentLocale() || getOptions().initialLocale);
 }

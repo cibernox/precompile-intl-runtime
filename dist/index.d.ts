@@ -1,5 +1,3 @@
-import { MessageObject } from './types/index';
-export declare function defineMessages(i: Record<string, MessageObject>): Record<string, MessageObject>;
 export declare function waitLocale(locale?: string): Promise<void>;
 export { init } from './configs';
 export { $locale as locale } from './stores/locale';
