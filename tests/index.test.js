@@ -10,7 +10,7 @@ import {
   dictionary,
   locales,
   init
-} from "../src";
+} from "../dist";
 
 beforeEach(() => {
   currentLocale.set(undefined);

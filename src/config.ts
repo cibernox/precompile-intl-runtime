@@ -1,6 +1,34 @@
 import { currentLocale } from "./stores";
+interface Formats {
+  number: Record<string, any>
+  date: Record<string, any>
+  time: Record<string, any>
+}
 
-const defaultFormats = {
+interface Options {
+  fallbackLocale: string
+  initialLocale: string
+  formats: Formats
+  loadingDelay: number
+  warnOnMissingMessages: boolean
+}
+
+interface GetClientLocaleOptions {
+  navigator?: boolean;
+  hash?: string;
+  search?: string;
+  pathname?: RegExp;
+  hostname?: RegExp;
+}
+
+interface ConfigureOptions {
+  fallbackLocale: string;
+  initialLocale?: string | GetClientLocaleOptions;
+  formats?: Partial<Formats>;
+  loadingDelay?: number;
+}
+
+const defaultFormats: Formats = {
   number: {
     scientific: { notation: "scientific" },
     engineering: { notation: "engineering" },
@@ -31,14 +59,15 @@ const defaultFormats = {
   }
 };
 
-const defaultOptions = {
+const defaultOptions: Options = {
   fallbackLocale: null,
   initialLocale: null,
   loadingDelay: 200,
   formats: defaultFormats,
   warnOnMissingMessages: true
 };
-const options = defaultOptions;
+const options: Options = defaultOptions;
+
 const getFromQueryString = (queryString, key) => {
   const keyVal = queryString.split("&").find(i => i.indexOf(`${key}=`) === 0);
 
@@ -56,7 +85,13 @@ const getFirstMatch = (base, pattern) => {
   return match[1] || null;
 };
 
-function getClientLocale({ navigator, hash, search, pathname, hostname }) {
+function getClientLocale({
+  navigator,
+  hash,
+  search,
+  pathname,
+  hostname
+}: GetClientLocaleOptions) {
   let locale;
 
   // istanbul ignore next
@@ -91,7 +126,7 @@ function getClientLocale({ navigator, hash, search, pathname, hostname }) {
   return null;
 }
 
-export function init(opts) {
+export function init(opts: ConfigureOptions) {
   const { formats, ...rest } = opts;
   const initialLocale = opts.initialLocale
     ? typeof opts.initialLocale === "string"
@@ -116,6 +151,6 @@ export function init(opts) {
   return currentLocale.set(initialLocale);
 }
 
-export function getOptions() {
+export function getOptions(): Options {
   return options;
 }
