@@ -9,7 +9,11 @@ import {
   currentLocale,
   dictionary,
   locales,
-  init
+  init,
+  formatMessage,
+  formatTime,
+  formatDate,
+  formatNumber
 } from "../dist";
 
 beforeEach(() => {
@@ -198,5 +202,35 @@ describe("addMessages", function() {
     addMessages('es', { salute: 'Hola' });
     unsubscribe();
     unsubscribe2();
+  });
+});
+
+describe("formatMessage", function() {
+  it('translates the given messages on the current locale', () => {
+    addMessages("en-US", { simple: "Hello", complex: (a, b) => `This is a function that interpolates ${b} and ${a}` });
+    expect(formatMessage("simple")).toBe("Hello");
+    expect(formatMessage("complex", { values: { a: 'HA', b: "BO" } })).toBe("This is a function that interpolates BO and HA");
+  });
+});
+
+describe("formatTime", function() {
+  let wedding = new Date(Date.UTC(2013, 11, 18, 19, 13, 50));
+  it('formats the given time in the current locale with the given style (if any)', () => {
+    expect(formatTime(wedding)).toBe("8:13 PM");
+    expect(formatTime(wedding, { format: "full" })).toBe("8:13:50 PM GMT+1");
+  });
+});
+
+describe("formatDate", function() {
+  let wedding = new Date(Date.UTC(2013, 11, 18, 19, 13, 50));
+  it("formats the given date in the current locale with the given style (if any)", () => {
+    expect(formatDate(wedding)).toBe("12/18/13");
+    expect(formatDate(wedding, { format: "full" })).toBe("Wednesday, December 18, 2013");
+  });
+});
+
+describe("formatNumber", function() {
+  it('works', () => {
+
   });
 });

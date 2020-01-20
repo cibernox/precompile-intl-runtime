@@ -22,7 +22,7 @@ class WritableStore<T> {
 }
 export type LocaleDictionaryValue = string | ((...args: any[]) => string)
 export type LocaleDictionary = Record<string, LocaleDictionaryValue>;
-/*export */ type Dictionary = Record<string, LocaleDictionary>;
+type Dictionary = Record<string, LocaleDictionary>;
 
 export const currentLocale = new WritableStore<string>(undefined);
 export const dictionary = new WritableStore<Dictionary>({});
@@ -30,6 +30,12 @@ export const locales = new WritableStore<string[]>([]);
 dictionary.subscribe(dict => {
   locales.set(Object.keys(dict));
 });
+
 export function getCurrentLocale(): string {
   return currentLocale._value;
+}
+
+
+export function lookupMessage(key: string, locale: string = getCurrentLocale()): LocaleDictionaryValue {
+  return dictionary._value[locale][key];
 }

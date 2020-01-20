@@ -1,4 +1,4 @@
-import { getCurrentLocale } from './stores';
+import { getCurrentLocale, lookupMessage } from './stores';
 import { getOptions } from './config';
 import { monadicMemoize } from './memoize';
 const getIntlFormatterOptions = (type, name) => {
@@ -45,6 +45,15 @@ export const getTimeFormatter = monadicMemoize(({ locale, format, ...options } =
 export const formatTime = (t, options) => getTimeFormatter(options).format(t);
 export const formatDate = (d, options) => getDateFormatter(options).format(d);
 export const formatNumber = (n, options) => getNumberFormatter(options).format(n);
+export const formatMessage = (id, options = {}) => {
+    const message = lookupMessage(id);
+    if (typeof message === 'string') {
+        return message;
+    }
+    else {
+        return message(...Object.keys(options.values || {}).sort().map(k => options.values[k]));
+    }
+};
 // import { getOptions } from "./config";
 // const CACHED = Object.create(null);
 // export function formatterOptions(type, style) {

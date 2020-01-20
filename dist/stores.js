@@ -27,3 +27,6 @@ dictionary.subscribe(dict => {
 export function getCurrentLocale() {
     return currentLocale._value;
 }
+export function lookupMessage(key, locale = getCurrentLocale()) {
+    return dictionary._value[locale][key];
+}

@@ -12,4 +12,5 @@ export declare const currentLocale: WritableStore<string>;
 export declare const dictionary: WritableStore<Record<string, Record<string, LocaleDictionaryValue>>>;
 export declare const locales: WritableStore<string[]>;
 export declare function getCurrentLocale(): string;
+export declare function lookupMessage(key: string, locale?: string): LocaleDictionaryValue;
 export {};

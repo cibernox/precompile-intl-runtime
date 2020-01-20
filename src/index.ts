@@ -14,7 +14,8 @@ import {
   getTimeFormatter,
   formatTime,
   formatDate,
-  formatNumber
+  formatNumber,
+  formatMessage
 } from "./formatters";
 
 type PluralRule = "zero" | "one" | "two" | "few" | "many" | "other" | number
@@ -72,10 +73,6 @@ export function addMessages(locale: string, messages: LocaleDictionary): void {
   });
 }
 
-export function lookupMessage(key: string, locale: string = getCurrentLocale()): LocaleDictionaryValue {
-  return dictionary._value[locale][key];
-}
-
 export {
   init,
   currentLocale,
@@ -84,6 +81,7 @@ export {
   getNumberFormatter,
   getDateFormatter,
   getTimeFormatter,
+  formatMessage,
   formatTime,
   formatDate,
   formatNumber

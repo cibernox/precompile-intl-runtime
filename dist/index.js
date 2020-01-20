@@ -1,6 +1,6 @@
 import { init } from "./config";
 import { currentLocale, dictionary, locales, getCurrentLocale } from "./stores";
-import { getNumberFormatter, getDateFormatter, getTimeFormatter, formatTime, formatDate, formatNumber } from "./formatters";
+import { getNumberFormatter, getDateFormatter, getTimeFormatter, formatTime, formatDate, formatNumber, formatMessage } from "./formatters";
 export function __interpolate(value) {
     return value === 0 ? 0 : value || '';
 }
@@ -40,7 +40,4 @@ export function addMessages(locale, messages) {
         return value;
     });
 }
-export function lookupMessage(key, locale = getCurrentLocale()) {
-    return dictionary._value[locale][key];
-}
-export { init, currentLocale, dictionary, locales, getNumberFormatter, getDateFormatter, getTimeFormatter, formatTime, formatDate, formatNumber };
+export { init, currentLocale, dictionary, locales, getNumberFormatter, getDateFormatter, getTimeFormatter, formatMessage, formatTime, formatDate, formatNumber };
