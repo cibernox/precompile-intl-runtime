@@ -19,7 +19,8 @@
     "helpers",
     "Intl",
     "precompile",
-    "runtime"
+    "runtime",
+    "i18n"
   ],
   "devDependencies": {
     "@babel/preset-env": "^7.0.0",
