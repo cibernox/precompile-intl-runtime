@@ -5,7 +5,8 @@ import {
   dictionary,
   locales,
   getCurrentLocale,
-  LocaleDictionary
+  LocaleDictionary,
+  LocaleDictionaryValue
 } from "./stores";
 import {
   getNumberFormatter,
@@ -71,7 +72,7 @@ export function addMessages(locale: string, messages: LocaleDictionary): void {
   });
 }
 
-export function lookupMessage(key: string, locale: string = getCurrentLocale()) {
+export function lookupMessage(key: string, locale: string = getCurrentLocale()): LocaleDictionaryValue {
   return dictionary._value[locale][key];
 }
 

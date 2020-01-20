@@ -20,7 +20,8 @@ class WritableStore<T> {
     this._subscribers.forEach(fn => fn(this._value));
   }
 }
-export type LocaleDictionary = Record<string, string>;
+export type LocaleDictionaryValue = string | ((...args: any[]) => string)
+export type LocaleDictionary = Record<string, LocaleDictionaryValue>;
 /*export */ type Dictionary = Record<string, LocaleDictionary>;
 
 export const currentLocale = new WritableStore<string>(undefined);

@@ -6,9 +6,10 @@ declare class WritableStore<T> {
     set(v: T): void;
     update(cb: (value: T) => T): void;
 }
-export declare type LocaleDictionary = Record<string, string>;
+export declare type LocaleDictionaryValue = string | ((...args: any[]) => string);
+export declare type LocaleDictionary = Record<string, LocaleDictionaryValue>;
 export declare const currentLocale: WritableStore<string>;
-export declare const dictionary: WritableStore<Record<string, Record<string, string>>>;
+export declare const dictionary: WritableStore<Record<string, Record<string, LocaleDictionaryValue>>>;
 export declare const locales: WritableStore<string[]>;
 export declare function getCurrentLocale(): string;
 export {};
