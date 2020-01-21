@@ -1,6 +1,7 @@
 import { getCurrentLocale } from './stores/locale'
 import { getOptions } from './configs'
 import { flush } from './includes/loaderQueue'
+export * from './includes/utils';
 
 export function waitLocale(locale?: string) {
   return flush(locale || getCurrentLocale() || getOptions().initialLocale)
