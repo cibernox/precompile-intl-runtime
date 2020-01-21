@@ -33,6 +33,6 @@ export function addMessages(locale, ...partials) {
         return d;
     });
 }
-const $locales = derived([$dictionary], ([$dictionary]) => Object.keys($dictionary));
+const $locales = /*@__PURE__*/ derived([$dictionary], ([$dictionary]) => Object.keys($dictionary));
 $dictionary.subscribe(newDictionary => (dictionary = newDictionary));
 export { $dictionary, $locales };
