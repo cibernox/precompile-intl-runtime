@@ -1,4 +1,5 @@
-import { derived } from './store'
+// @ts-ignore
+import { derived } from "svelte/store";
 
 import {
   MessageFormatter,

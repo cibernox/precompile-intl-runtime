@@ -1,4 +1,5 @@
-import { writable, derived } from './store'
+// @ts-ignore
+import { writable, derived } from 'svelte/store'
 
 import { LocaleDictionary, DeepDictionary, Dictionary } from '../types/index'
 

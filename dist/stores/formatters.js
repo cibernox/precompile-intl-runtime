@@ -1,4 +1,5 @@
-import { derived } from './store';
+// @ts-ignore
+import { derived } from "svelte/store";
 import { lookup } from '../includes/lookup';
 import { hasLocaleQueue } from '../includes/loaderQueue';
 import { getTimeFormatter, getDateFormatter, getNumberFormatter, } from '../includes/formatters';
