@@ -54,24 +54,12 @@ function getLocalPluralFor(v: number): PluralRule {
   let key = pluralRules.select(v);
   return key === 'other' ? 'h' : key[0];
 }
-export function __plural(
-  value: number,
-  offsetOrOptions: number | PluralOptions,
-  opts?: PluralOptions
-): string {
-  if (typeof offsetOrOptions === "number") {
-    return (
-      opts[value] ||
-      opts[getLocalPluralFor(value - offsetOrOptions)] ||
-      ""
-    );
-  } else {
-    return (
-      offsetOrOptions[value] ||
-      offsetOrOptions[getLocalPluralFor(value)] ||
-      ""
-    );
-  }
+export function __offsetPlural(value: number, offset: number, opts: PluralOptions): string {
+  return opts[value] || opts[getLocalPluralFor(value - offset)] || "";
+}
+
+export function __plural(value: number, opts: PluralOptions): string {
+  return opts[value] || opts[getLocalPluralFor(value)] || "";
 }
 
 export function __select(value: any, opts: Record<any, string>): string {
