@@ -66,7 +66,7 @@ export const formatDate: DateFormatter = (d, options) =>
 export const formatNumber: NumberFormatter = (n, options) =>
   getNumberFormatter(options).format(n)
 
-export const $format = derived([$locale, $dictionary], () => formatMessage)
-export const $formatTime = derived([$locale], () => formatTime)
-export const $formatDate = derived([$locale], () => formatDate)
-export const $formatNumber = derived([$locale], () => formatNumber)
+export const $format = /*@__PURE__*/derived([$locale, $dictionary], () => formatMessage);
+export const $formatTime = /*@__PURE__*/derived([$locale], () => formatTime);
+export const $formatDate = /*@__PURE__*/derived([$locale], () => formatDate);
+export const $formatNumber = /*@__PURE__*/derived([$locale], () => formatNumber);
