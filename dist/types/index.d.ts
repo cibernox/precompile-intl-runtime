@@ -30,13 +30,6 @@ export interface MemoizedIntlFormatter<T, U> {
 export interface MessagesLoader {
     (): Promise<any>;
 }
-export interface GetClientLocaleOptions {
-    navigator?: boolean;
-    hash?: string;
-    search?: string;
-    pathname?: RegExp;
-    hostname?: RegExp;
-}
 export interface ConfigureOptions {
     fallbackLocale: string;
     initialLocale?: string;
