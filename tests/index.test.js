@@ -51,13 +51,13 @@ describe('__plural', function() {
   it("works respecting the pluralization rules of the current locale", () => {
     locale.set('en-US');
     let pluralizations = {
-      zero: "no cats",
-      one: "one cat",
-      two: "a couple cats",
-      3: "a triplet of cats",  // a specific translation for 3 that trups over
-      few: "a few cats",
-      many: "many cats",
-      other: "other cats"
+      z: "no cats",
+      o: "one cat",
+      t: "a couple cats",
+      3: "a triplet of cats",  // a specific translation for 3 that trumps over anything else
+      f: "a few cats",
+      m: "many cats",
+      h: "other cats"
     };
     expect(__plural(0, pluralizations)).toBe('other cats'); // english has no zero pluralization
     expect(__plural(1, pluralizations)).toBe('one cat');
@@ -81,8 +81,8 @@ describe('__plural', function() {
     let translation = trainers => __plural(trainers, 1, {
       0: "The gym is empty",
       1: "You are alone here",
-      one: `You and ${trainers - 1} trainer`,
-      other: `You and ${trainers - 1} other trainers`
+      o: `You and ${trainers - 1} trainer`,
+      h: `You and ${trainers - 1} other trainers`
     });
 
     expect(translation(0)).toBe("The gym is empty");

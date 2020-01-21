@@ -51,7 +51,8 @@ const PLURAL_RULES = Object.create(null);
 function getLocalPluralFor(v: number): PluralRule {
   let loc = getCurrentLocale();
   let pluralRules = PLURAL_RULES[loc] || (PLURAL_RULES[loc] = new Intl.PluralRules(loc));
-  return pluralRules.select(v);
+  let key = pluralRules.select(v);
+  return key === 'other' ? 'h' : key[0];
 }
 export function __plural(
   value: number,
