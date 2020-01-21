@@ -23,17 +23,11 @@ function getLocalPluralFor(v) {
     let key = pluralRules.select(v);
     return key === 'other' ? 'h' : key[0];
 }
-export function __plural(value, offsetOrOptions, opts) {
-    if (typeof offsetOrOptions === "number") {
-        return (opts[value] ||
-            opts[getLocalPluralFor(value - offsetOrOptions)] ||
-            "");
-    }
-    else {
-        return (offsetOrOptions[value] ||
-            offsetOrOptions[getLocalPluralFor(value)] ||
-            "");
-    }
+export function __offsetPlural(value, offset, opts) {
+    return opts[value] || opts[getLocalPluralFor(value - offset)] || "";
+}
+export function __plural(value, opts) {
+    return opts[value] || opts[getLocalPluralFor(value)] || "";
 }
 export function __select(value, opts) {
     return opts[value] || opts['other'] || '';

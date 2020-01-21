@@ -9,7 +9,8 @@ export { getDateFormatter, getNumberFormatter, getTimeFormatter, } from './inclu
 declare type PluralRule = "zero" | "one" | "two" | "few" | "many" | "other" | number;
 declare type PluralOptions = Record<PluralRule, string>;
 export declare function __interpolate(value: any): any;
-export declare function __plural(value: number, offsetOrOptions: number | PluralOptions, opts?: PluralOptions): string;
+export declare function __offsetPlural(value: number, offset: number, opts: PluralOptions): string;
+export declare function __plural(value: number, opts: PluralOptions): string;
 export declare function __select(value: any, opts: Record<any, string>): string;
 export declare function __number(value: number, format?: string): string;
 export declare function __date(value: Date, format?: string): string;

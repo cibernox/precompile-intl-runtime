@@ -1,6 +1,7 @@
 import {
   __interpolate,
   __plural,
+  __offsetPlural,
   __select,
   __date,
   __time,
@@ -76,9 +77,11 @@ describe('__plural', function() {
     expect(__plural(18, pluralizations)).toBe('many cats');
     expect(__plural(200, pluralizations)).toBe('other cats');
   });
+});
 
-  it('supports receiving an offset as second argument', function() {
-    let translation = trainers => __plural(trainers, 1, {
+describe('__offsetPlural', function() {
+  it('works respecting the offset and the pluralization rules of the current locale', function() {
+    let translation = trainers => __offsetPlural(trainers, 1, {
       0: "The gym is empty",
       1: "You are alone here",
       o: `You and ${trainers - 1} trainer`,
