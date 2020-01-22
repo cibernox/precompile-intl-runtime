@@ -1,5 +1,5 @@
-import { writable } from './store'
-
+// @ts-ignore
+import { writable } from 'svelte/store'
 import { flush, hasLocaleQueue } from '../includes/loaderQueue'
 import { getOptions } from '../configs'
 

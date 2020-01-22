@@ -1,1 +1,1 @@
-export declare const $isLoading: import("./store").Writable<boolean>;
+export declare const $isLoading: any;

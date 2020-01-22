@@ -1,4 +1,5 @@
-import { writable, derived } from './store';
+// @ts-ignore
+import { writable, derived } from 'svelte/store';
 import { getFallbackOf } from './locale';
 let dictionary;
 const $dictionary = writable({});

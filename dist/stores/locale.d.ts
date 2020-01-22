@@ -1,4 +1,4 @@
-declare const $locale: import("./store").Writable<any>;
+declare const $locale: any;
 export declare function isFallbackLocaleOf(localeA: string, localeB: string): boolean;
 export declare function isRelatedLocale(localeA: string, localeB: string): boolean;
 export declare function getFallbackOf(locale: string): string;
