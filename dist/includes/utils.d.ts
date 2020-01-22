@@ -1,10 +1,11 @@
+import { GetClientLocaleOptions } from "../types/index";
 export declare function capital(str: string): string;
 export declare function title(str: string): string;
 export declare function upper(str: string): string;
 export declare function lower(str: string): string;
-export declare const hostnameLocale: () => (regex: any) => string;
-export declare const pathnameLocale: () => (regex: any) => string;
-export declare const navigatorLocale: () => () => string;
-export declare const searchLocale: () => (regex: any) => string;
-export declare const hashLocale: () => (regex: any) => string;
-export declare const getClientLocale: (strategies: any) => any;
+export declare const hostnameLocale: (regex: any) => string;
+export declare const pathnameLocale: (regex: any) => string;
+export declare const navigatorLocale: () => string;
+export declare const searchLocale: (regex: any) => string;
+export declare const hashLocale: (regex: any) => string;
+export declare const getClientLocale: ({ navigator, hash, search, pathname, hostname }: GetClientLocaleOptions) => string;
