@@ -1,4 +1,4 @@
-import { GetClientLocaleOptions } from '../types/index'
+import { GetClientLocaleOptions } from "../types/index";
 
 export function capital(str: string) {
   return str.replace(/(^|\s)\S/, l => l.toLocaleUpperCase())
@@ -14,21 +14,6 @@ export function upper(str: string) {
 
 export function lower(str: string) {
   return str.toLocaleLowerCase()
-}
-
-// could use a reduce, but a simple for-in has less footprint
-export const flatObj = (obj: Record<string, any>, prefix = '') => {
-  const flatted: Record<string, string> = {}
-  for (const key in obj) {
-    const flatKey = prefix + key
-    // we want plain objects and arrays
-    if (typeof obj[key] === 'object') {
-      Object.assign(flatted, flatObj(obj[key], `${flatKey}.`))
-    } else {
-      flatted[flatKey] = obj[key]
-    }
-  }
-  return flatted
 }
 
 const getFromQueryString = (queryString: string, key: string) => {
@@ -48,43 +33,27 @@ const getFirstMatch = (base: string, pattern: RegExp) => {
   return match[1] || null
 }
 
+export const hostnameLocale = regex => getFirstMatch(window.location.hostname, regex);
+export const pathnameLocale = regex => getFirstMatch(window.location.pathname, regex);
+export const navigatorLocale = () => window.navigator.language || window.navigator.languages[0];
+export const searchLocale = regex => getFromQueryString(window.location.search.substr(1), regex);
+export const hashLocale = regex => getFromQueryString(window.location.hash.substr(1), regex);
+
 export const getClientLocale = ({
   navigator,
   hash,
   search,
   pathname,
-  hostname,
+  hostname
 }: GetClientLocaleOptions) => {
-  let locale
-
   // istanbul ignore next
-  if (typeof window === 'undefined') return null
-
-  if (hostname) {
-    locale = getFirstMatch(window.location.hostname, hostname)
-    if (locale) return locale
-  }
-
-  if (pathname) {
-    locale = getFirstMatch(window.location.pathname, pathname)
-    if (locale) return locale
-  }
-
-  if (navigator) {
-    // istanbul ignore else
-    locale = window.navigator.language || window.navigator.languages[0]
-    if (locale) return locale
-  }
-
-  if (search) {
-    locale = getFromQueryString(window.location.search.substr(1), search)
-    if (locale) return locale
-  }
-
-  if (hash) {
-    locale = getFromQueryString(window.location.hash.substr(1), hash)
-    if (locale) return locale
-  }
-
-  return null
-}
+  if (typeof window === "undefined") return null;
+  return (
+    hostname && hostnameLocale(hostname) ||
+    pathname && pathnameLocale(pathname) ||
+    navigator && navigatorLocale() ||
+    search && searchLocale(search) ||
+    hash && hashLocale(hash) ||
+    null
+  );
+};

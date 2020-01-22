@@ -39,7 +39,7 @@ export interface GetClientLocaleOptions {
 }
 export interface ConfigureOptions {
     fallbackLocale: string;
-    initialLocale?: string | GetClientLocaleOptions;
+    initialLocale?: string;
     formats?: Partial<Formats>;
     loadingDelay?: number;
 }

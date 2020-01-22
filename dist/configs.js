@@ -1,4 +1,3 @@
-import { getClientLocale } from './includes/utils';
 import { $locale } from './stores/locale';
 export const defaultFormats = {
     number: {
@@ -43,11 +42,7 @@ export function getOptions() {
 }
 export function init(opts) {
     const { formats, ...rest } = opts;
-    const initialLocale = opts.initialLocale
-        ? typeof opts.initialLocale === 'string'
-            ? opts.initialLocale
-            : getClientLocale(opts.initialLocale) || opts.fallbackLocale
-        : opts.fallbackLocale;
+    const initialLocale = opts.initialLocale || opts.fallbackLocale;
     Object.assign(options, rest, { initialLocale });
     if (formats) {
         if ('number' in formats) {

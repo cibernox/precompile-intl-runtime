@@ -1,5 +1,4 @@
 import { writable, derived } from './store';
-import { flatObj } from '../includes/utils';
 import { getFallbackOf } from './locale';
 let dictionary;
 const $dictionary = writable({});
@@ -27,9 +26,8 @@ export function getClosestAvailableLocale(locale) {
     return getClosestAvailableLocale(getFallbackOf(locale));
 }
 export function addMessages(locale, ...partials) {
-    const flattedPartials = partials.map(partial => flatObj(partial));
     $dictionary.update(d => {
-        d[locale] = Object.assign(d[locale] || {}, ...flattedPartials);
+        d[locale] = Object.assign(d[locale] || {}, ...partials);
         return d;
     });
 }

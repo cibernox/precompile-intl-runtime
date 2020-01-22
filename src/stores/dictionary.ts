@@ -1,7 +1,6 @@
 import { writable, derived } from './store'
 
 import { LocaleDictionary, DeepDictionary, Dictionary } from '../types/index'
-import { flatObj } from '../includes/utils'
 
 import { getFallbackOf } from './locale'
 
@@ -36,10 +35,8 @@ export function getClosestAvailableLocale(locale: string): string | null {
 }
 
 export function addMessages(locale: string, ...partials: DeepDictionary[]) {
-  const flattedPartials = partials.map(partial => flatObj(partial))
-
   $dictionary.update(d => {
-    d[locale] = Object.assign(d[locale] || {}, ...flattedPartials)
+    d[locale] = Object.assign(d[locale] || {}, ...partials)
     return d
   })
 }

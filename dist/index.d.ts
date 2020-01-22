@@ -1,3 +1,4 @@
+export * from './includes/utils';
 export declare function waitLocale(locale?: string): Promise<void>;
 export { init } from './configs';
 export { $locale as locale } from './stores/locale';
