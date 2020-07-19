@@ -15,7 +15,7 @@ import {
   formatTime,
   formatDate,
   formatNumber
-} from "../dist";
+} from "../dist/modules";
 
 beforeEach(() => {
   locale.set(undefined);

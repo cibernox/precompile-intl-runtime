@@ -1,0 +1,10 @@
+import { DeepDictionary } from '../types/index';
+declare const $dictionary: import("svelte/store").Writable<Record<string, Record<string, import("../types").LocaleDictionaryValue>>>;
+export declare function getLocaleDictionary(locale: string): Record<string, import("../types").LocaleDictionaryValue>;
+export declare function getDictionary(): Record<string, Record<string, import("../types").LocaleDictionaryValue>>;
+export declare function hasLocaleDictionary(locale: string): boolean;
+export declare function getMessageFromDictionary(locale: string, id: string): import("../types").LocaleDictionaryValue;
+export declare function getClosestAvailableLocale(locale: string): string | null;
+export declare function addMessages(locale: string, ...partials: DeepDictionary[]): void;
+declare const $locales: import("svelte/store").Readable<string[]>;
+export { $dictionary, $locales };

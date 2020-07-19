@@ -33,11 +33,11 @@ const getFirstMatch = (base: string, pattern: RegExp) => {
   return match[1] || null
 }
 
-export const hostnameLocale = regex => getFirstMatch(window.location.hostname, regex);
-export const pathnameLocale = regex => getFirstMatch(window.location.pathname, regex);
+export const hostnameLocale = (regex: RegExp) => getFirstMatch(window.location.hostname, regex);
+export const pathnameLocale = (regex: RegExp) => getFirstMatch(window.location.pathname, regex);
 export const navigatorLocale = () => window.navigator.language || window.navigator.languages[0];
-export const searchLocale = regex => getFromQueryString(window.location.search.substr(1), regex);
-export const hashLocale = regex => getFromQueryString(window.location.hash.substr(1), regex);
+export const searchLocale = (str: string) => getFromQueryString(window.location.search.substr(1), str);
+export const hashLocale = (str: string) => getFromQueryString(window.location.hash.substr(1), str);
 
 export const getClientLocale = ({
   navigator,

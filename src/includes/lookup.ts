@@ -11,13 +11,12 @@ const addToCache = (path: string, locale: string, message: LocaleDictionaryValue
   return message
 }
 
-const searchForMessage = (path: string, locale: string): LocaleDictionaryValue => {
-  if (locale == null) return null
+const searchForMessage = (path: string, locale: string | null): LocaleDictionaryValue => {
+  if (locale == null) return '';
 
   const message = getMessageFromDictionary(locale, path)
   if (message) return message
-
-  return searchForMessage(path, getFallbackOf(locale))
+  return searchForMessage(path, getFallbackOf(locale));
 }
 
 export const lookup = (path: string, locale: string) => {

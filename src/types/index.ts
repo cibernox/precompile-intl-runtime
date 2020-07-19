@@ -12,7 +12,7 @@ export type LocaleDictionary = Record<string, LocaleDictionaryValue>;
 export type Dictionary = Record<string, LocaleDictionary>
 
 export interface MessageObject {
-  id?: string
+  id: string
   locale?: string
   format?: string
   default?: string

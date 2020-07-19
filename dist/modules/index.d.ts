@@ -1,0 +1,18 @@
+export * from './includes/utils';
+export declare function waitLocale(locale?: string): Promise<void>;
+export { init } from './configs';
+export { $locale as locale } from './stores/locale';
+export { $dictionary as dictionary, $locales as locales, addMessages, } from './stores/dictionary';
+export { registerLocaleLoader as register } from './includes/loaderQueue';
+export { $isLoading as isLoading } from './stores/loading';
+export { $format as format, $format as _, $format as t, $formatDate as formatDate, $formatNumber as formatNumber, $formatTime as formatTime, } from './stores/formatters';
+export { getDateFormatter, getNumberFormatter, getTimeFormatter, } from './includes/formatters';
+declare type PluralRule = "zero" | "one" | "two" | "few" | "many" | "other" | number;
+declare type PluralOptions = Record<PluralRule, string>;
+export declare function __interpolate(value: any): any;
+export declare function __offsetPlural(value: number, offset: number, opts: PluralOptions): string;
+export declare function __plural(value: number, opts: PluralOptions): string;
+export declare function __select(value: any, opts: Record<any, string>): string;
+export declare function __number(value: number, format?: string): string;
+export declare function __date(value: Date, format?: string): string;
+export declare function __time(value: Date, format?: string): string;

@@ -6,7 +6,7 @@ import { getTimeFormatter, getDateFormatter, getNumberFormatter, } from '../incl
 import { getOptions } from '../configs';
 import { $dictionary } from './dictionary';
 import { getCurrentLocale, getRelatedLocalesOf, $locale } from './locale';
-export const formatMessage = (id, options = {}) => {
+export const formatMessage = (id, options = { id: '#missing-message-id#' }) => {
     if (typeof id === 'object') {
         options = id;
         id = options.id;
@@ -29,7 +29,7 @@ export const formatMessage = (id, options = {}) => {
         return message;
     }
     else {
-        return message(...Object.keys(options.values || {}).sort().map(k => options.values[k]));
+        return message(...Object.keys(options.values || {}).sort().map(k => (options.values || {})[k]));
     }
 };
 export const formatTime = (t, options) => getTimeFormatter(options).format(t);

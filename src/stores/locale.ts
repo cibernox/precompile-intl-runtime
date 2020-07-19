@@ -6,7 +6,7 @@ import { getOptions } from '../configs'
 import { getClosestAvailableLocale } from './dictionary'
 
 let current: string
-const $locale = writable(null)
+const $locale = writable('')
 
 export function isFallbackLocaleOf(localeA: string, localeB: string) {
   return localeB.indexOf(localeA) === 0 && localeA !== localeB
@@ -64,8 +64,11 @@ $locale.set = (newLocale: string): void | Promise<void> => {
   return localeSet(newLocale)
 }
 
+// $locale.update = (fn: (locale: string) => void | Promise<void>) => localeSet(fn(current)); This was what I had but typescript doesn't like it, not sure if i refactored correctly.
 // istanbul ignore next
-$locale.update = (fn: (locale: string) => void | Promise<void>) =>
-  localeSet(fn(current))
+$locale.update = (fn: (locale: string) => void) => {
+  fn(current);
+  localeSet(current);
+}
 
 export { $locale }

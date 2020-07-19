@@ -14,5 +14,5 @@ interface Options {
 export declare const defaultFormats: Formats;
 export declare const defaultOptions: Options;
 export declare function getOptions(): Options;
-export declare function init(opts: ConfigureOptions): any;
+export declare function init(opts: ConfigureOptions): void;
 export {};

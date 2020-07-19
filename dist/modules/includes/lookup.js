@@ -12,7 +12,7 @@ const addToCache = (path, locale, message) => {
 };
 const searchForMessage = (path, locale) => {
     if (locale == null)
-        return null;
+        return '';
     const message = getMessageFromDictionary(locale, path);
     if (message)
         return message;

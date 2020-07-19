@@ -30,9 +30,9 @@ export function getMessageFromDictionary(locale: string, id: string) {
   return null
 }
 
-export function getClosestAvailableLocale(locale: string): string | null {
+export function getClosestAvailableLocale(locale: string | null): string | null {
   if (locale == null || hasLocaleDictionary(locale)) return locale
-  return getClosestAvailableLocale(getFallbackOf(locale))
+  return getClosestAvailableLocale(getFallbackOf(locale));
 }
 
 export function addMessages(locale: string, ...partials: DeepDictionary[]) {

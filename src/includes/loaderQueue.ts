@@ -47,13 +47,13 @@ export function hasLocaleQueue(locale: string) {
 
 const activeLocaleFlushes: { [key: string]: Promise<void> } = {}
 export function flush(locale: string) {
-  if (!hasLocaleQueue(locale)) return
+  if (!hasLocaleQueue(locale)) return Promise.resolve();
   if (locale in activeLocaleFlushes) return activeLocaleFlushes[locale]
 
   // get queue of XX-YY and XX locales
   const queues = getLocalesQueues(locale)
   // istanbul ignore if
-  if (queues.length === 0) return
+  if (queues.length === 0) return Promise.resolve();
 
   const loadingDelay = setTimeout(
     () => $isLoading.set(true),

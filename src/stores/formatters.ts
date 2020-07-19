@@ -20,7 +20,7 @@ import { getOptions } from '../configs'
 import { $dictionary } from './dictionary'
 import { getCurrentLocale, getRelatedLocalesOf, $locale } from './locale'
 
-export const formatMessage: MessageFormatter = (id, options = {}) => {
+export const formatMessage: MessageFormatter = (id, options = {id: '#missing-message-id#'}) => {
   if (typeof id === 'object') {
     options = id as MessageObject
     id = options.id
@@ -54,7 +54,7 @@ export const formatMessage: MessageFormatter = (id, options = {}) => {
   if (typeof message === 'string') {
     return message;
   } else {
-    return message(...Object.keys(options.values || {}).sort().map(k => options.values[k]));
+    return message(...Object.keys(options.values || {}).sort().map(k => (options.values || {})[k]));
   }
 }
 

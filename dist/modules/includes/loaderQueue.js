@@ -34,14 +34,14 @@ export function hasLocaleQueue(locale) {
 const activeLocaleFlushes = {};
 export function flush(locale) {
     if (!hasLocaleQueue(locale))
-        return;
+        return Promise.resolve();
     if (locale in activeLocaleFlushes)
         return activeLocaleFlushes[locale];
     // get queue of XX-YY and XX locales
     const queues = getLocalesQueues(locale);
     // istanbul ignore if
     if (queues.length === 0)
-        return;
+        return Promise.resolve();
     const loadingDelay = setTimeout(() => $isLoading.set(true), getOptions().loadingDelay);
     // TODO what happens if some loader fails
     activeLocaleFlushes[locale] = Promise.all(queues.map(([locale, queue]) => {

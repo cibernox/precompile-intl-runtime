@@ -30,8 +30,8 @@ export const defaultFormats = {
     },
 };
 export const defaultOptions = {
-    fallbackLocale: null,
-    initialLocale: null,
+    fallbackLocale: '',
+    initialLocale: '',
     loadingDelay: 200,
     formats: defaultFormats,
     warnOnMissingMessages: true,

@@ -1,4 +1,4 @@
-declare const $locale: any;
+declare const $locale: import("svelte/store").Writable<any>;
 export declare function isFallbackLocaleOf(localeA: string, localeB: string): boolean;
 export declare function isRelatedLocale(localeA: string, localeB: string): boolean;
 export declare function getFallbackOf(locale: string): string;
