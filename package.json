@@ -15,7 +15,7 @@
   "main": "dist/commonjs/index.js",
   "module": "dist/modules/index.js",
   "types": "dist/index.d.ts",
-  "dependencies": {
+  "peerDependencies": {
     "svelte": "^3.37.0"
   },
   "keywords": [
