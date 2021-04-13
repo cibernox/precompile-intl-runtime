@@ -32,12 +32,17 @@ const getFirstMatch = (base, pattern) => {
     // istanbul ignore else
     return match[1] || null;
 };
-exports.hostnameLocale = regex => getFirstMatch(window.location.hostname, regex);
-exports.pathnameLocale = regex => getFirstMatch(window.location.pathname, regex);
-exports.navigatorLocale = () => window.navigator.language || window.navigator.languages[0];
-exports.searchLocale = regex => getFromQueryString(window.location.search.substr(1), regex);
-exports.hashLocale = regex => getFromQueryString(window.location.hash.substr(1), regex);
-exports.getClientLocale = ({ navigator, hash, search, pathname, hostname }) => {
+const hostnameLocale = (regex) => getFirstMatch(window.location.hostname, regex);
+exports.hostnameLocale = hostnameLocale;
+const pathnameLocale = (regex) => getFirstMatch(window.location.pathname, regex);
+exports.pathnameLocale = pathnameLocale;
+const navigatorLocale = () => window.navigator.language || window.navigator.languages[0];
+exports.navigatorLocale = navigatorLocale;
+const searchLocale = (str) => getFromQueryString(window.location.search.substr(1), str);
+exports.searchLocale = searchLocale;
+const hashLocale = (str) => getFromQueryString(window.location.hash.substr(1), str);
+exports.hashLocale = hashLocale;
+const getClientLocale = ({ navigator, hash, search, pathname, hostname }) => {
     // istanbul ignore next
     if (typeof window === "undefined")
         return null;
@@ -48,3 +53,4 @@ exports.getClientLocale = ({ navigator, hash, search, pathname, hostname }) => {
         hash && exports.hashLocale(hash) ||
         null);
 };
+exports.getClientLocale = getClientLocale;

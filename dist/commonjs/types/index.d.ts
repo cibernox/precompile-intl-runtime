@@ -10,7 +10,7 @@ export declare type LocaleDictionaryValue = string | ((...args: any[]) => string
 export declare type LocaleDictionary = Record<string, LocaleDictionaryValue>;
 export declare type Dictionary = Record<string, LocaleDictionary>;
 export interface MessageObject {
-    id?: string;
+    id: string;
     locale?: string;
     format?: string;
     default?: string;

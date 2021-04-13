@@ -33,8 +33,8 @@ exports.defaultFormats = {
     },
 };
 exports.defaultOptions = {
-    fallbackLocale: null,
-    initialLocale: null,
+    fallbackLocale: '',
+    initialLocale: '',
     loadingDelay: 200,
     formats: exports.defaultFormats,
     warnOnMissingMessages: true,

@@ -7,10 +7,10 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
     o[k2] = m[k];
 }));
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.__time = exports.__date = exports.__number = exports.__select = exports.__plural = exports.__offsetPlural = exports.__interpolate = exports.waitLocale = void 0;
+exports.__time = exports.__date = exports.__number = exports.__select = exports.__plural = exports.__offsetPlural = exports.__interpolate = exports.getTimeFormatter = exports.getNumberFormatter = exports.getDateFormatter = exports.formatTime = exports.formatNumber = exports.formatDate = exports.t = exports._ = exports.format = exports.isLoading = exports.register = exports.addMessages = exports.locales = exports.dictionary = exports.locale = exports.init = exports.waitLocale = void 0;
 const locale_1 = require("./stores/locale");
 const configs_1 = require("./configs");
 const loaderQueue_1 = require("./includes/loaderQueue");

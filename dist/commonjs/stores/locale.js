@@ -7,7 +7,7 @@ const loaderQueue_1 = require("../includes/loaderQueue");
 const configs_1 = require("../configs");
 const dictionary_1 = require("./dictionary");
 let current;
-const $locale = store_1.writable(null);
+const $locale = store_1.writable('');
 exports.$locale = $locale;
 function isFallbackLocaleOf(localeA, localeB) {
     return localeB.indexOf(localeA) === 0 && localeA !== localeB;
@@ -58,5 +58,9 @@ $locale.set = (newLocale) => {
     }
     return localeSet(newLocale);
 };
+// $locale.update = (fn: (locale: string) => void | Promise<void>) => localeSet(fn(current)); This was what I had but typescript doesn't like it, not sure if i refactored correctly.
 // istanbul ignore next
-$locale.update = (fn) => localeSet(fn(current));
+$locale.update = (fn) => {
+    fn(current);
+    localeSet(current);
+};

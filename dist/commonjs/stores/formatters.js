@@ -9,7 +9,7 @@ const formatters_1 = require("../includes/formatters");
 const configs_1 = require("../configs");
 const dictionary_1 = require("./dictionary");
 const locale_1 = require("./locale");
-exports.formatMessage = (id, options = {}) => {
+const formatMessage = (id, options = { id: '#missing-message-id#' }) => {
     if (typeof id === 'object') {
         options = id;
         id = options.id;
@@ -32,12 +32,16 @@ exports.formatMessage = (id, options = {}) => {
         return message;
     }
     else {
-        return message(...Object.keys(options.values || {}).sort().map(k => options.values[k]));
+        return message(...Object.keys(options.values || {}).sort().map(k => (options.values || {})[k]));
     }
 };
-exports.formatTime = (t, options) => formatters_1.getTimeFormatter(options).format(t);
-exports.formatDate = (d, options) => formatters_1.getDateFormatter(options).format(d);
-exports.formatNumber = (n, options) => formatters_1.getNumberFormatter(options).format(n);
+exports.formatMessage = formatMessage;
+const formatTime = (t, options) => formatters_1.getTimeFormatter(options).format(t);
+exports.formatTime = formatTime;
+const formatDate = (d, options) => formatters_1.getDateFormatter(options).format(d);
+exports.formatDate = formatDate;
+const formatNumber = (n, options) => formatters_1.getNumberFormatter(options).format(n);
+exports.formatNumber = formatNumber;
 exports.$format = store_1.derived([locale_1.$locale, dictionary_1.$dictionary], () => exports.formatMessage);
 exports.$formatTime = store_1.derived([locale_1.$locale], () => exports.formatTime);
 exports.$formatDate = store_1.derived([locale_1.$locale], () => exports.formatDate);

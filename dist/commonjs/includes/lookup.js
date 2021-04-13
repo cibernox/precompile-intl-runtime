@@ -15,13 +15,13 @@ const addToCache = (path, locale, message) => {
 };
 const searchForMessage = (path, locale) => {
     if (locale == null)
-        return null;
+        return '';
     const message = dictionary_1.getMessageFromDictionary(locale, path);
     if (message)
         return message;
     return searchForMessage(path, locale_1.getFallbackOf(locale));
 };
-exports.lookup = (path, locale) => {
+const lookup = (path, locale) => {
     if (locale in exports.lookupCache && path in exports.lookupCache[locale]) {
         return exports.lookupCache[locale][path];
     }
@@ -31,3 +31,4 @@ exports.lookup = (path, locale) => {
     }
     return null;
 };
+exports.lookup = lookup;
