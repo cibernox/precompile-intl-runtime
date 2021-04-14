@@ -1,5 +1,5 @@
 import { getMessageFromDictionary } from '../stores/dictionary'
-import { getFallbackOf } from '../stores/locale'
+import { getFallbackOf } from './utils';
 import { LocaleDictionaryValue } from '../types/index'
 
 export const lookupCache: Record<string, Record<string, LocaleDictionaryValue>> = {}

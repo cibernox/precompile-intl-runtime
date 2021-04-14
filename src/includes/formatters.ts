@@ -1,6 +1,5 @@
 import { MemoizedIntlFormatter } from '../types/index'
-import { getCurrentLocale } from '../stores/locale'
-import { getOptions } from '../configs'
+import { getOptions, getCurrentLocale } from './utils';
 import { monadicMemoize } from './memoize'
 
 const getIntlFormatterOptions = (

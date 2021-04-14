@@ -1,6 +1,5 @@
-import { getCurrentLocale } from './stores/locale'
-import { getOptions } from './configs'
 import { flush } from './includes/loaderQueue'
+import { getOptions, getCurrentLocale } from './includes/utils'
 export * from './includes/utils';
 
 export function waitLocale(locale?: string) {

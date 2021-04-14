@@ -1,68 +1,11 @@
 import { ConfigureOptions } from './types/index'
-import { $locale } from './stores/locale'
-
-interface Formats {
-  number: Record<string, any>
-  date: Record<string, any>
-  time: Record<string, any>
-}
-
-interface Options {
-  fallbackLocale: string
-  initialLocale: string
-  formats: Formats
-  loadingDelay: number
-  warnOnMissingMessages: boolean
-}
-
-export const defaultFormats: Formats = {
-  number: {
-    scientific: { notation: 'scientific' },
-    engineering: { notation: 'engineering' },
-    compactLong: { notation: 'compact', compactDisplay: 'long' },
-    compactShort: { notation: 'compact', compactDisplay: 'short' },
-  },
-  date: {
-    short: { month: 'numeric', day: 'numeric', year: '2-digit' },
-    medium: { month: 'short', day: 'numeric', year: 'numeric' },
-    long: { month: 'long', day: 'numeric', year: 'numeric' },
-    full: { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' },
-  },
-  time: {
-    short: { hour: 'numeric', minute: 'numeric' },
-    medium: { hour: 'numeric', minute: 'numeric', second: 'numeric' },
-    long: {
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-      timeZoneName: 'short',
-    },
-    full: {
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-      timeZoneName: 'short',
-    },
-  },
-}
-
-export const defaultOptions: Options = {
-  fallbackLocale: '',
-  initialLocale: '',
-  loadingDelay: 200,
-  formats: defaultFormats,
-  warnOnMissingMessages: true,
-}
-
-const options: Options = defaultOptions
-
-export function getOptions() {
-  return options
-}
+import { $locale } from './stores/locale';
+import { getOptions } from './includes/utils';
 
 export function init(opts: ConfigureOptions) {
   const { formats, ...rest } = opts
   const initialLocale = opts.initialLocale || opts.fallbackLocale;
+  const options = getOptions();
   Object.assign(options, rest, { initialLocale })
 
   if (formats) {

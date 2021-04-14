@@ -1,9 +1,7 @@
 // @ts-ignore
-import { writable, derived } from 'svelte/store'
-
-import { LocaleDictionary, DeepDictionary, Dictionary } from '../types/index'
-
-import { getFallbackOf } from './locale'
+import { writable, derived } from 'svelte/store';
+import { LocaleDictionary, DeepDictionary, Dictionary } from '../types/index';
+import { getFallbackOf } from '../includes/utils';
 
 let dictionary: Dictionary
 const $dictionary = writable<Dictionary>({})

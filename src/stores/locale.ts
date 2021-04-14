@@ -1,55 +1,13 @@
 // @ts-ignore
 import { writable } from 'svelte/store'
 import { flush, hasLocaleQueue } from '../includes/loaderQueue'
-import { getOptions } from '../configs'
-
+import { getCurrentLocale, setCurrentLocale } from '../includes/utils';
 import { getClosestAvailableLocale } from './dictionary'
 
-let current: string
 const $locale = writable('')
 
-export function isFallbackLocaleOf(localeA: string, localeB: string) {
-  return localeB.indexOf(localeA) === 0 && localeA !== localeB
-}
-
-export function isRelatedLocale(localeA: string, localeB: string) {
-  return (
-    localeA === localeB ||
-    isFallbackLocaleOf(localeA, localeB) ||
-    isFallbackLocaleOf(localeB, localeA)
-  )
-}
-
-export function getFallbackOf(locale: string) {
-  const index = locale.lastIndexOf('-')
-  if (index > 0) return locale.slice(0, index)
-
-  const { fallbackLocale } = getOptions()
-  if (fallbackLocale && !isRelatedLocale(locale, fallbackLocale)) {
-    return fallbackLocale
-  }
-
-  return null
-}
-
-export function getRelatedLocalesOf(locale: string): string[] {
-  const locales = locale
-    .split('-')
-    .map((_, i, arr) => arr.slice(0, i + 1).join('-'))
-
-  const { fallbackLocale } = getOptions()
-  if (fallbackLocale && !isRelatedLocale(locale, fallbackLocale)) {
-    return locales.concat(getRelatedLocalesOf(fallbackLocale))
-  }
-  return locales
-}
-
-export function getCurrentLocale() {
-  return current
-}
-
 $locale.subscribe((newLocale: string) => {
-  current = newLocale
+  setCurrentLocale(newLocale)
 
   if (typeof window !== 'undefined') {
     document.documentElement.setAttribute('lang', newLocale)
@@ -67,8 +25,9 @@ $locale.set = (newLocale: string): void | Promise<void> => {
 // $locale.update = (fn: (locale: string) => void | Promise<void>) => localeSet(fn(current)); This was what I had but typescript doesn't like it, not sure if i refactored correctly.
 // istanbul ignore next
 $locale.update = (fn: (locale: string) => void) => {
-  fn(current);
-  localeSet(current);
+  let currentLocale = getCurrentLocale();
+  fn(currentLocale);
+  localeSet(currentLocale);
 }
 
 export { $locale }
