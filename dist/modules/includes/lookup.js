@@ -1,5 +1,5 @@
 import { getMessageFromDictionary } from '../stores/dictionary';
-import { getFallbackOf } from '../stores/locale';
+import { getFallbackOf } from './utils';
 export const lookupCache = {};
 const addToCache = (path, locale, message) => {
     if (!message)

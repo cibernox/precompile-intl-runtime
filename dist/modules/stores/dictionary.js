@@ -1,6 +1,6 @@
 // @ts-ignore
 import { writable, derived } from 'svelte/store';
-import { getFallbackOf } from './locale';
+import { getFallbackOf } from '../includes/utils';
 let dictionary;
 const $dictionary = writable({});
 export function getLocaleDictionary(locale) {

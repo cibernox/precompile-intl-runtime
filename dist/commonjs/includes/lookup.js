@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.lookup = exports.lookupCache = void 0;
 const dictionary_1 = require("../stores/dictionary");
-const locale_1 = require("../stores/locale");
+const utils_1 = require("./utils");
 exports.lookupCache = {};
 const addToCache = (path, locale, message) => {
     if (!message)
@@ -19,7 +19,7 @@ const searchForMessage = (path, locale) => {
     const message = dictionary_1.getMessageFromDictionary(locale, path);
     if (message)
         return message;
-    return searchForMessage(path, locale_1.getFallbackOf(locale));
+    return searchForMessage(path, utils_1.getFallbackOf(locale));
 };
 const lookup = (path, locale) => {
     if (locale in exports.lookupCache && path in exports.lookupCache[locale]) {

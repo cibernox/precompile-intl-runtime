@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.$locales = exports.$dictionary = exports.addMessages = exports.getClosestAvailableLocale = exports.getMessageFromDictionary = exports.hasLocaleDictionary = exports.getDictionary = exports.getLocaleDictionary = void 0;
 // @ts-ignore
 const store_1 = require("svelte/store");
-const locale_1 = require("./locale");
+const utils_1 = require("../includes/utils");
 let dictionary;
 const $dictionary = store_1.writable({});
 exports.$dictionary = $dictionary;
@@ -32,7 +32,7 @@ exports.getMessageFromDictionary = getMessageFromDictionary;
 function getClosestAvailableLocale(locale) {
     if (locale == null || hasLocaleDictionary(locale))
         return locale;
-    return getClosestAvailableLocale(locale_1.getFallbackOf(locale));
+    return getClosestAvailableLocale(utils_1.getFallbackOf(locale));
 }
 exports.getClosestAvailableLocale = getClosestAvailableLocale;
 function addMessages(locale, ...partials) {

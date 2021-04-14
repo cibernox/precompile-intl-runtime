@@ -6,7 +6,7 @@ const store_1 = require("svelte/store");
 const lookup_1 = require("../includes/lookup");
 const loaderQueue_1 = require("../includes/loaderQueue");
 const formatters_1 = require("../includes/formatters");
-const configs_1 = require("../configs");
+const utils_1 = require("../includes/utils");
 const dictionary_1 = require("./dictionary");
 const locale_1 = require("./locale");
 const formatMessage = (id, options = { id: '#missing-message-id#' }) => {
@@ -14,15 +14,15 @@ const formatMessage = (id, options = { id: '#missing-message-id#' }) => {
         options = id;
         id = options.id;
     }
-    const { values, locale = locale_1.getCurrentLocale(), default: defaultValue } = options;
+    const { values, locale = utils_1.getCurrentLocale(), default: defaultValue } = options;
     if (locale == null) {
         throw new Error('[svelte-i18n] Cannot format a message without first setting the initial locale.');
     }
     const message = lookup_1.lookup(id, locale);
     if (!message) {
-        if (configs_1.getOptions().warnOnMissingMessages) {
+        if (utils_1.getOptions().warnOnMissingMessages) {
             // istanbul ignore next
-            console.warn(`[svelte-i18n] The message "${id}" was not found in "${locale_1.getRelatedLocalesOf(locale).join('", "')}".${loaderQueue_1.hasLocaleQueue(locale_1.getCurrentLocale())
+            console.warn(`[svelte-i18n] The message "${id}" was not found in "${utils_1.getRelatedLocalesOf(locale).join('", "')}".${loaderQueue_1.hasLocaleQueue(utils_1.getCurrentLocale())
                 ? `\n\nNote: there are at least one loader still registered to this locale that wasn't executed.`
                 : ''}`);
         }

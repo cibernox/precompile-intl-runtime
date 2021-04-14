@@ -11,18 +11,17 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.__time = exports.__date = exports.__number = exports.__select = exports.__plural = exports.__offsetPlural = exports.__interpolate = exports.getTimeFormatter = exports.getNumberFormatter = exports.getDateFormatter = exports.formatTime = exports.formatNumber = exports.formatDate = exports.t = exports._ = exports.format = exports.isLoading = exports.register = exports.addMessages = exports.locales = exports.dictionary = exports.locale = exports.init = exports.waitLocale = void 0;
-const locale_1 = require("./stores/locale");
-const configs_1 = require("./configs");
 const loaderQueue_1 = require("./includes/loaderQueue");
+const utils_1 = require("./includes/utils");
 __exportStar(require("./includes/utils"), exports);
 function waitLocale(locale) {
-    return loaderQueue_1.flush(locale || locale_1.getCurrentLocale() || configs_1.getOptions().initialLocale);
+    return loaderQueue_1.flush(locale || utils_1.getCurrentLocale() || utils_1.getOptions().initialLocale);
 }
 exports.waitLocale = waitLocale;
-var configs_2 = require("./configs");
-Object.defineProperty(exports, "init", { enumerable: true, get: function () { return configs_2.init; } });
-var locale_2 = require("./stores/locale");
-Object.defineProperty(exports, "locale", { enumerable: true, get: function () { return locale_2.$locale; } });
+var configs_1 = require("./configs");
+Object.defineProperty(exports, "init", { enumerable: true, get: function () { return configs_1.init; } });
+var locale_1 = require("./stores/locale");
+Object.defineProperty(exports, "locale", { enumerable: true, get: function () { return locale_1.$locale; } });
 var dictionary_1 = require("./stores/dictionary");
 Object.defineProperty(exports, "dictionary", { enumerable: true, get: function () { return dictionary_1.$dictionary; } });
 Object.defineProperty(exports, "locales", { enumerable: true, get: function () { return dictionary_1.$locales; } });
@@ -50,7 +49,7 @@ function __interpolate(value) {
 exports.__interpolate = __interpolate;
 const PLURAL_RULES = Object.create(null);
 function getLocalPluralFor(v) {
-    let loc = locale_1.getCurrentLocale();
+    let loc = utils_1.getCurrentLocale();
     let pluralRules = PLURAL_RULES[loc] || (PLURAL_RULES[loc] = new Intl.PluralRules(loc));
     let key = pluralRules.select(v);
     return key === 'other' ? 'h' : key[0];

@@ -2,9 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerLocaleLoader = exports.flush = exports.hasLocaleQueue = exports.resetQueues = void 0;
 const dictionary_1 = require("../stores/dictionary");
-const locale_1 = require("../stores/locale");
+const utils_1 = require("../includes/utils");
 const loading_1 = require("../stores/loading");
-const configs_1 = require("../configs");
 const loaderQueue = {};
 function resetQueues() {
     Object.keys(loaderQueue).forEach(key => {
@@ -22,7 +21,7 @@ function getLocaleQueue(locale) {
     return loaderQueue[locale];
 }
 function getLocalesQueues(locale) {
-    return locale_1.getRelatedLocalesOf(locale)
+    return utils_1.getRelatedLocalesOf(locale)
         .reverse()
         .map(localeItem => {
         const queue = getLocaleQueue(localeItem);
@@ -31,7 +30,7 @@ function getLocalesQueues(locale) {
         .filter(([, queue]) => queue.length > 0);
 }
 function hasLocaleQueue(locale) {
-    return locale_1.getRelatedLocalesOf(locale)
+    return utils_1.getRelatedLocalesOf(locale)
         .reverse()
         .some(getLocaleQueue);
 }
@@ -47,7 +46,7 @@ function flush(locale) {
     // istanbul ignore if
     if (queues.length === 0)
         return Promise.resolve();
-    const loadingDelay = setTimeout(() => loading_1.$isLoading.set(true), configs_1.getOptions().loadingDelay);
+    const loadingDelay = setTimeout(() => loading_1.$isLoading.set(true), utils_1.getOptions().loadingDelay);
     // TODO what happens if some loader fails
     activeLocaleFlushes[locale] = Promise.all(queues.map(([locale, queue]) => {
         return Promise.all(queue.map(loader => loader())).then(partials => {

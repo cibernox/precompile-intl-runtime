@@ -3,9 +3,9 @@ import { derived } from "svelte/store";
 import { lookup } from '../includes/lookup';
 import { hasLocaleQueue } from '../includes/loaderQueue';
 import { getTimeFormatter, getDateFormatter, getNumberFormatter, } from '../includes/formatters';
-import { getOptions } from '../configs';
+import { getOptions, getCurrentLocale, getRelatedLocalesOf } from '../includes/utils';
 import { $dictionary } from './dictionary';
-import { getCurrentLocale, getRelatedLocalesOf, $locale } from './locale';
+import { $locale } from './locale';
 export const formatMessage = (id, options = { id: '#missing-message-id#' }) => {
     if (typeof id === 'object') {
         options = id;

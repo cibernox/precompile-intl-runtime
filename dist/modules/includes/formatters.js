@@ -1,5 +1,4 @@
-import { getCurrentLocale } from '../stores/locale';
-import { getOptions } from '../configs';
+import { getOptions, getCurrentLocale } from './utils';
 import { monadicMemoize } from './memoize';
 const getIntlFormatterOptions = (type, name) => {
     const formats = getOptions().formats;
