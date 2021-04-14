@@ -13,7 +13,6 @@
     "build-legacy": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "test": "jest test"
   },
-  "main": "dist/commonjs/index.js",
   "module": "dist/modules/index.js",
   "types": "dist/index.d.ts",
   "peerDependencies": {
