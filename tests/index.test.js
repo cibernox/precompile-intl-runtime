@@ -11,10 +11,10 @@ import {
   dictionary,
   locales,
   init,
-  formatMessage,
-  formatTime,
-  formatDate,
-  formatNumber
+  format,
+  time,
+  date,
+  number
 } from "../dist/modules";
 
 beforeEach(() => {
@@ -198,32 +198,45 @@ describe("addMessages", function() {
   });
 });
 
-// describe("formatMessage", function() {
-//   it('translates the given messages on the current locale', () => {
-//     addMessages("en-US", { simple: "Hello", complex: (a, b) => `This is a function that interpolates ${b} and ${a}` });
-//     expect(formatMessage("simple")).toBe("Hello");
-//     expect(formatMessage("complex", { values: { a: 'HA', b: "BO" } })).toBe("This is a function that interpolates BO and HA");
-//   });
-// });
+describe("format", function() {
+  it('translates the given messages on the current locale', () => {
+    addMessages("en-US", { simple: "Hello", complex: (a, b) => `This is a function that interpolates ${b} and ${a}` });
+    let unsubscribe = format.subscribe(t => {
+      expect(t("simple")).toBe("Hello");
+      expect(t("complex", { values: { a: 'HA', b: "BO" } })).toBe("This is a function that interpolates BO and HA");
+    });
+    unsubscribe()
+  });
+});
 
-// describe("formatTime", function() {
-//   let wedding = new Date(Date.UTC(2013, 11, 18, 19, 13, 50));
-//   it('formats the given time in the current locale with the given style (if any)', () => {
-//     expect(formatTime(wedding)).toBe("8:13 PM");
-//     expect(formatTime(wedding, { format: "full" })).toBe("8:13:50 PM GMT+1");
-//   });
-// });
+describe("time", function() {
+  let wedding = new Date(Date.UTC(2013, 11, 18, 19, 13, 50));
+  it('formats the given time in the current locale with the given style (if any)', () => {
+    let unsubscribe = time.subscribe(format => {
+      expect(format(wedding)).toBe("8:13 PM");
+      expect(format(wedding, { format: "full" })).toBe("8:13:50 PM GMT+1");
+    });
+    unsubscribe();
+  });
+});
 
-// describe("formatDate", function() {
-//   let wedding = new Date(Date.UTC(2013, 11, 18, 19, 13, 50));
-//   it("formats the given date in the current locale with the given style (if any)", () => {
-//     expect(formatDate(wedding)).toBe("12/18/13");
-//     expect(formatDate(wedding, { format: "full" })).toBe("Wednesday, December 18, 2013");
-//   });
-// });
+describe("date", function() {
+  let wedding = new Date(Date.UTC(2013, 11, 18, 19, 13, 50));
+  it("formats the given date in the current locale with the given style (if any)", () => {
+    let unsubscribe = date.subscribe(format => {
+      expect(format(wedding)).toBe("12/18/13");
+      expect(format(wedding, { format: "full" })).toBe("Wednesday, December 18, 2013");
+    });
+    unsubscribe();
+  });
+});
 
-// describe("formatNumber", function() {
-//   it('works', () => {
-
-//   });
-// });
+describe("number", function() {
+  let num = 123456.789;
+  it("formats the given number in the current locale with the given style (if any)", () => {
+    number.subscribe(format => {
+      expect(format(num)).toBe("123,456.789");
+      expect(format(num, { format: "eur" })).toBe("€123,456.79");
+    });
+  });
+});

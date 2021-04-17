@@ -5,7 +5,7 @@ export { $locale as locale } from './stores/locale';
 export { $dictionary as dictionary, $locales as locales, addMessages, } from './stores/dictionary';
 export { registerLocaleLoader as register } from './includes/loaderQueue';
 export { $isLoading as isLoading } from './stores/loading';
-export { $format as format, $format as _, $format as t, $formatDate as formatDate, $formatNumber as formatNumber, $formatTime as formatTime, } from './stores/formatters';
+export { $format as format, $format as _, $format as t, $formatDate as date, $formatNumber as number, $formatTime as time, } from './stores/formatters';
 export { getDateFormatter, getNumberFormatter, getTimeFormatter, } from './includes/formatters';
 declare type PluralRule = "zero" | "one" | "two" | "few" | "many" | "other" | number;
 declare type PluralOptions = Record<PluralRule, string>;

@@ -28,9 +28,9 @@ export {
   $format as format,
   $format as _,
   $format as t,
-  $formatDate as formatDate,
-  $formatNumber as formatNumber,
-  $formatTime as formatTime,
+  $formatDate as date,
+  $formatNumber as number,
+  $formatTime as time,
 } from './stores/formatters'
 
 // low-level

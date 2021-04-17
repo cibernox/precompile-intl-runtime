@@ -10,7 +10,7 @@ export { $dictionary as dictionary, $locales as locales, addMessages, } from './
 export { registerLocaleLoader as register } from './includes/loaderQueue';
 export { $isLoading as isLoading } from './stores/loading';
 import { formatTime, formatDate, formatNumber } from './stores/formatters';
-export { $format as format, $format as _, $format as t, $formatDate as formatDate, $formatNumber as formatNumber, $formatTime as formatTime, } from './stores/formatters';
+export { $format as format, $format as _, $format as t, $formatDate as date, $formatNumber as number, $formatTime as time, } from './stores/formatters';
 // low-level
 export { getDateFormatter, getNumberFormatter, getTimeFormatter, } from './includes/formatters';
 export function __interpolate(value) {

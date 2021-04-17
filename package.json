@@ -1,6 +1,6 @@
 {
   "name": "precompile-intl-runtime",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "description": "Runtime helpers to be used in translations precompiled by babel-plugin-precompile-intl",
   "repository": "https://github.com/cibernox/precompile-intl-runtime",
   "author": {
