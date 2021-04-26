@@ -3,7 +3,7 @@ import { derived } from "svelte/store";
 import { lookup } from '../includes/lookup';
 import { hasLocaleQueue } from '../includes/loaderQueue';
 import { getTimeFormatter, getDateFormatter, getNumberFormatter, } from '../includes/formatters';
-import { getOptions, getCurrentLocale, getRelatedLocalesOf } from '../includes/utils';
+import { getOptions, getCurrentLocale, getPossibleLocales } from '../includes/utils';
 import { $dictionary } from './dictionary';
 import { $locale } from './locale';
 export const formatMessage = (id, options = { id: '#missing-message-id#' }) => {
@@ -11,15 +11,15 @@ export const formatMessage = (id, options = { id: '#missing-message-id#' }) => {
         options = id;
         id = options.id;
     }
-    const { values, locale = getCurrentLocale(), default: defaultValue } = options;
+    const { values, locale = getCurrentLocale(), default: defaultValue, } = options;
     if (locale == null) {
         throw new Error('[svelte-i18n] Cannot format a message without first setting the initial locale.');
     }
-    const message = lookup(id, locale);
+    let message = lookup(id, locale);
     if (!message) {
         if (getOptions().warnOnMissingMessages) {
             // istanbul ignore next
-            console.warn(`[svelte-i18n] The message "${id}" was not found in "${getRelatedLocalesOf(locale).join('", "')}".${hasLocaleQueue(getCurrentLocale())
+            console.warn(`[svelte-i18n] The message "${id}" was not found in "${getPossibleLocales(locale).join('", "')}".${hasLocaleQueue(getCurrentLocale())
                 ? `\n\nNote: there are at least one loader still registered to this locale that wasn't executed.`
                 : ''}`);
         }

@@ -1,5 +1,5 @@
 import { hasLocaleDictionary, $dictionary, addMessages, } from '../stores/dictionary';
-import { getRelatedLocalesOf, getOptions } from '../includes/utils';
+import { getPossibleLocales, getOptions } from '../includes/utils';
 import { $isLoading } from '../stores/loading';
 const loaderQueue = {};
 export function resetQueues() {
@@ -17,7 +17,7 @@ function getLocaleQueue(locale) {
     return loaderQueue[locale];
 }
 function getLocalesQueues(locale) {
-    return getRelatedLocalesOf(locale)
+    return getPossibleLocales(locale)
         .reverse()
         .map(localeItem => {
         const queue = getLocaleQueue(localeItem);
@@ -26,7 +26,7 @@ function getLocalesQueues(locale) {
         .filter(([, queue]) => queue.length > 0);
 }
 export function hasLocaleQueue(locale) {
-    return getRelatedLocalesOf(locale)
+    return getPossibleLocales(locale)
         .reverse()
         .some(getLocaleQueue);
 }

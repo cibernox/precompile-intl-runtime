@@ -1,16 +1,16 @@
 import { getOptions, getCurrentLocale } from './utils';
 import { monadicMemoize } from './memoize';
 const getIntlFormatterOptions = (type, name) => {
-    const formats = getOptions().formats;
+    const { formats } = getOptions();
     if (type in formats && name in formats[type]) {
         return formats[type][name];
     }
-    throw new Error(`[svelte-i18n] Unknown "${name}" ${type} format.`);
+    throw new Error(`[precompile-intl-runtime] Unknown "${name}" ${type} format.`);
 };
 export const getNumberFormatter = monadicMemoize(({ locale, format, ...options } = {}) => {
     locale = locale || getCurrentLocale();
     if (locale == null) {
-        throw new Error('[svelte-i18n] A "locale" must be set to format numbers');
+        throw new Error('[precompile-intl-runtime] A "locale" must be set to format numbers');
     }
     if (format) {
         options = getIntlFormatterOptions('number', format);
@@ -20,10 +20,11 @@ export const getNumberFormatter = monadicMemoize(({ locale, format, ...options }
 export const getDateFormatter = monadicMemoize(({ locale, format, ...options } = {}) => {
     locale = locale || getCurrentLocale();
     if (locale == null) {
-        throw new Error('[svelte-i18n] A "locale" must be set to format dates');
+        throw new Error('[precompile-intl-runtime] A "locale" must be set to format dates');
     }
-    if (format)
+    if (format) {
         options = getIntlFormatterOptions('date', format);
+    }
     else if (Object.keys(options).length === 0) {
         options = getIntlFormatterOptions('date', 'short');
     }
@@ -32,10 +33,11 @@ export const getDateFormatter = monadicMemoize(({ locale, format, ...options } =
 export const getTimeFormatter = monadicMemoize(({ locale, format, ...options } = {}) => {
     locale = locale || getCurrentLocale();
     if (locale == null) {
-        throw new Error('[svelte-i18n] A "locale" must be set to format time values');
+        throw new Error('[precompile-intl-runtime] A "locale" must be set to format time values');
     }
-    if (format)
+    if (format) {
         options = getIntlFormatterOptions('time', format);
+    }
     else if (Object.keys(options).length === 0) {
         options = getIntlFormatterOptions('time', 'short');
     }

@@ -1,6 +1,6 @@
 // @ts-ignore
 import { writable, derived } from 'svelte/store';
-import { getFallbackOf } from '../includes/utils';
+import { getPossibleLocales } from '../includes/utils';
 let dictionary;
 const $dictionary = writable({});
 export function getLocaleDictionary(locale) {
@@ -21,10 +21,17 @@ export function getMessageFromDictionary(locale, id) {
     }
     return null;
 }
-export function getClosestAvailableLocale(locale) {
-    if (locale == null || hasLocaleDictionary(locale))
-        return locale;
-    return getClosestAvailableLocale(getFallbackOf(locale));
+export function getClosestAvailableLocale(refLocale) {
+    if (refLocale == null)
+        return null;
+    const relatedLocales = getPossibleLocales(refLocale);
+    for (let i = 0; i < relatedLocales.length; i++) {
+        const locale = relatedLocales[i];
+        if (hasLocaleDictionary(locale)) {
+            return locale;
+        }
+    }
+    return null;
 }
 export function addMessages(locale, ...partials) {
     $dictionary.update(d => {

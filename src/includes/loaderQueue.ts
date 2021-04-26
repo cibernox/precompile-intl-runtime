@@ -4,7 +4,7 @@ import {
   $dictionary,
   addMessages,
 } from '../stores/dictionary'
-import { getRelatedLocalesOf, getOptions } from '../includes/utils';
+import { getPossibleLocales, getOptions } from '../includes/utils';
 import { $isLoading } from '../stores/loading'
 
 type Queue = Set<MessagesLoader>
@@ -29,7 +29,7 @@ function getLocaleQueue(locale: string) {
 }
 
 function getLocalesQueues(locale: string) {
-  return getRelatedLocalesOf(locale)
+  return getPossibleLocales(locale)
     .reverse()
     .map<[string, MessagesLoader[]]>(localeItem => {
       const queue = getLocaleQueue(localeItem)
@@ -39,7 +39,7 @@ function getLocalesQueues(locale: string) {
 }
 
 export function hasLocaleQueue(locale: string) {
-  return getRelatedLocalesOf(locale)
+  return getPossibleLocales(locale)
     .reverse()
     .some(getLocaleQueue)
 }

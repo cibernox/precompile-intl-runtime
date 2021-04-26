@@ -15,48 +15,55 @@ import {
   getDateFormatter,
   getNumberFormatter,
 } from '../includes/formatters'
-import { getOptions, getCurrentLocale, getRelatedLocalesOf } from '../includes/utils';
+import { getOptions, getCurrentLocale, getPossibleLocales } from '../includes/utils';
 
 import { $dictionary } from './dictionary'
 import { $locale } from './locale'
 
 export const formatMessage: MessageFormatter = (id, options = {id: '#missing-message-id#'}) => {
   if (typeof id === 'object') {
-    options = id as MessageObject
-    id = options.id
-  }
-  const { values, locale = getCurrentLocale(), default: defaultValue } = options
-  if (locale == null) {
-    throw new Error(
-      '[precompile-intl-runtime] Cannot format a message without first setting the initial locale.'
-    )
+    options = id as MessageObject;
+    id = options.id;
   }
 
-  const message = lookup(id, locale)
+  const {
+    values,
+    locale = getCurrentLocale(),
+    default: defaultValue,
+  } = options;
+
+  if (locale == null) {
+    throw new Error(
+      '[svelte-i18n] Cannot format a message without first setting the initial locale.',
+    );
+  }
+
+  let message = lookup(id, locale);
 
   if (!message) {
     if (getOptions().warnOnMissingMessages) {
       // istanbul ignore next
       console.warn(
-        `[precompile-intl-runtime] The message "${id}" was not found in "${getRelatedLocalesOf(
-          locale
+        `[svelte-i18n] The message "${id}" was not found in "${getPossibleLocales(
+          locale,
         ).join('", "')}".${
           hasLocaleQueue(getCurrentLocale())
             ? `\n\nNote: there are at least one loader still registered to this locale that wasn't executed.`
             : ''
-        }`
-      )
+        }`,
+      );
     }
+
     return defaultValue || id;
   }
-
-
+  
   if (typeof message === 'string') {
     return message;
   } else {
     return message(...Object.keys(options.values || {}).sort().map(k => (options.values || {})[k]));
-  }
-}
+  }    
+};
+  
 
 export const formatTime: TimeFormatter = (t, options) =>
   getTimeFormatter(options).format(t)
