@@ -28,7 +28,7 @@ export const formatMessage: MessageFormatter = (id, options = {id: '#missing-mes
   const { values, locale = getCurrentLocale(), default: defaultValue } = options
   if (locale == null) {
     throw new Error(
-      '[svelte-i18n] Cannot format a message without first setting the initial locale.'
+      '[precompile-intl-runtime] Cannot format a message without first setting the initial locale.'
     )
   }
 
@@ -38,7 +38,7 @@ export const formatMessage: MessageFormatter = (id, options = {id: '#missing-mes
     if (getOptions().warnOnMissingMessages) {
       // istanbul ignore next
       console.warn(
-        `[svelte-i18n] The message "${id}" was not found in "${getRelatedLocalesOf(
+        `[precompile-intl-runtime] The message "${id}" was not found in "${getRelatedLocalesOf(
           locale
         ).join('", "')}".${
           hasLocaleQueue(getCurrentLocale())
