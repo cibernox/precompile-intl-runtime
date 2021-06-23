@@ -9,12 +9,11 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "build-legacy": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "test": "jest test"
   },
   "module": "dist/modules/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/modules/index.d.ts",
   "peerDependencies": {
     "svelte": "^3.37.0"
   },
