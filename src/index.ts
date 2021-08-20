@@ -32,6 +32,7 @@ export {
   $formatDate as date,
   $formatNumber as number,
   $formatTime as time,
+  $getJSON as json,
 } from './stores/formatters'
 
 // low-level
