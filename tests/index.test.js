@@ -200,10 +200,20 @@ describe("addMessages", function() {
 
 describe("format", function() {
   it('translates the given messages on the current locale', () => {
-    addMessages("en-US", { simple: "Hello", complex: (a, b) => `This is a function that interpolates ${b} and ${a}` });
+    addMessages("en-US", {
+      simple: "Hello",
+      nested: {
+        deep: "Goodbye"
+      },
+      "nested.fake": "Greetings",
+      complex: (a, b) => `This is a function that interpolates ${b} and ${a}`
+    });
     let unsubscribe = format.subscribe(t => {
       expect(t("simple")).toBe("Hello");
-      expect(t("complex", { values: { a: 'HA', b: "BO" } })).toBe("This is a function that interpolates BO and HA");
+      expect(t("nested.deep")).toBe("Goodbye");
+      expect(t("nested.fake")).toBe("Greetings");
+      expect(t("complex", { values: { a: 'HA', b: "BO" } }))
+        .toBe("This is a function that interpolates BO and HA");
     });
     unsubscribe()
   });

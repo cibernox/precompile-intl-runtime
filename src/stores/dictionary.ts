@@ -1,6 +1,7 @@
 // @ts-ignore
 import { writable, derived } from 'svelte/store';
-import { LocaleDictionary, DeepDictionary, Dictionary } from '../types/index';
+import { LocaleDictionary, LocaleDictionaryValue, DeepDictionary, Dictionary }
+  from '../types/index';
 import { getPossibleLocales } from '../includes/utils';
 
 let dictionary: Dictionary
@@ -23,6 +24,15 @@ export function getMessageFromDictionary(locale: string, id: string) {
     const localeDictionary = getLocaleDictionary(locale)
     if (id in localeDictionary) {
       return localeDictionary[id]
+    }
+
+    const ids = id.split('.')
+    let tmpDict: any = localeDictionary
+    for (let i = 0; i < ids.length; i++) {
+      if (typeof tmpDict[ids[i]] !== 'object') {
+        return (tmpDict[ids[i]] as LocaleDictionaryValue) || null
+      }
+      tmpDict = tmpDict[ids[i]];
     }
   }
   return null
