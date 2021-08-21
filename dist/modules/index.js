@@ -34,7 +34,7 @@ export function __select(value, opts) {
     return opts[value] || opts['other'] || '';
 }
 export function __number(value, format) {
-    return formatNumber(value, { format, locale: getCurrentLocale() });
+    return formatNumber(value, { locale: getCurrentLocale(), format });
 }
 export function __date(value, format = "short") {
     return formatDate(value, { format, locale: getCurrentLocale() });

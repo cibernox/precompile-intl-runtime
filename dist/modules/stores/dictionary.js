@@ -18,6 +18,14 @@ export function getMessageFromDictionary(locale, id) {
         if (id in localeDictionary) {
             return localeDictionary[id];
         }
+        const ids = id.split('.');
+        let tmpDict = localeDictionary;
+        for (let i = 0; i < ids.length; i++) {
+            if (typeof tmpDict[ids[i]] !== 'object') {
+                return tmpDict[ids[i]] || null;
+            }
+            tmpDict = tmpDict[ids[i]];
+        }
     }
     return null;
 }
