@@ -78,3 +78,4 @@ export function __date(value: Date, format = "short"): string {
 
 export function __time(value: Date, format = "short"): string {
   return formatTime(value, { format, locale: getCurrentLocale() });
+}
