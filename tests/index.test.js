@@ -122,6 +122,14 @@ describe('__date', function() {
     let wedding = new Date('2013-10-18');
     expect(__date(wedding, "abbr-full")).toBe("Friday, Oct 18");
   });
+
+  it('honours current locale setting', function() {
+    let disaster = new Date('1986-01-28');
+    locale.set("en");
+    expect(__date(disaster)).toBe("1/28/86");
+    locale.set("de");
+    expect(__date(disaster)).toBe("28.1.86");
+  });
 });
 
 describe("__time", function() {
@@ -142,12 +150,21 @@ describe("__time", function() {
     let wedding = new Date(Date.UTC(2013, 11, 18, 19, 13, 50));
     expect(__time(wedding, "hour")).toBe("8 PM");
   });
+
+  it('honours current locale setting', function() {
+    let wedding = new Date(Date.UTC(2013, 11, 18, 19, 13, 50));
+    expect(__time(wedding, "hour")).toBe("8 PM");
+    locale.set("de");
+    expect(__time(wedding, "hour")).toBe("20 Uhr");
+  });
 });
 
 describe("__number", function() {
   it('formats numbers in the current\'s locale way', function() {
     expect(__number(12345678)).toBe("12,345,678");
-  });
+    locale.set("de");
+    expect(__number(12345678)).toBe("12.345.678");
+    });
 
   it('accepts "scientific", "engineering", "compactLong" and "compactShort" as second argument', function() {
     expect(__number(12345678, "scientific")).toBe("1.235E7");

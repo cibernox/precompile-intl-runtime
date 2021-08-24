@@ -69,13 +69,12 @@ export function __select(value: any, opts: Record<any, string>): string {
 }
 
 export function __number(value: number, format?: string): string {
-  return formatNumber(value, { format });
+  return formatNumber(value, { locale: getCurrentLocale(), format });
 }
 
 export function __date(value: Date, format = "short"): string {
-  return formatDate(value, { format });
+  return formatDate(value, { format, locale: getCurrentLocale() });
 }
 
 export function __time(value: Date, format = "short"): string {
-  return formatTime(value, { format });
-}
+  return formatTime(value, { format, locale: getCurrentLocale() });
