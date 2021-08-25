@@ -19,6 +19,11 @@ export interface MessageObject {
   values?: Record<string, string | number | Date>
 }
 
+export type JsonGetter = (
+  id: string,
+  locale?: string
+) => any
+
 export type MessageFormatter = (
   id: string | MessageObject,
   options?: MessageObject

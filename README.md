@@ -33,10 +33,11 @@ WIP
 - `dictionary`
 - `locales`
 - `addMessages`
-- `t`
+- `format`, `t`, `_`
 - `formatDate`
 - `formatNumber`
 - `formatTime`
+- `json`
 - `getDateFormatter`
 - `getNumberFormatter`
 - `getTimeFormatter`

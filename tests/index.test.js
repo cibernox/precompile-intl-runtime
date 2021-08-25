@@ -14,7 +14,8 @@ import {
   format,
   time,
   date,
-  number
+  number,
+  json
 } from "../dist/modules";
 
 beforeEach(() => {
@@ -231,6 +232,20 @@ describe("format", function() {
       expect(t("nested.fake")).toBe("Greetings");
       expect(t("complex", { values: { a: 'HA', b: "BO" } }))
         .toBe("This is a function that interpolates BO and HA");
+    });
+    unsubscribe()
+  });
+});
+
+describe("json", function() {
+  it('retrieves json segment of messages on the current locale', () => {
+    addMessages("en-US", {
+      nested: {
+        deep: "Goodbye"
+      },
+    });
+    let unsubscribe = json.subscribe(j => {
+      expect(j("nested")).toStrictEqual({ deep: "Goodbye" });
     });
     unsubscribe()
   });
