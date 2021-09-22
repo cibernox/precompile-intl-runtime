@@ -1,4 +1,3 @@
-// @ts-ignore
 import { derived } from "svelte/store";
 
 import {
@@ -8,6 +7,7 @@ import {
   DateFormatter,
   NumberFormatter,
   JsonGetter,
+  MessageObjectWithId,
 } from '../types/index'
 import { lookup } from '../includes/lookup'
 import { hasLocaleQueue } from '../includes/loaderQueue'
@@ -21,11 +21,9 @@ import { getOptions, getCurrentLocale, getPossibleLocales } from '../includes/ut
 import { $dictionary } from './dictionary'
 import { $locale } from './locale'
 
-export const formatMessage: MessageFormatter = (id, options = {id: '#missing-message-id#'}) => {
-  if (typeof id === 'object') {
-    options = id as MessageObject;
-    id = options.id;
-  }
+export const formatMessage: MessageFormatter = (optionsOrId, maybeOptions= {}) => {
+  const id = typeof optionsOrId === 'string' ? optionsOrId : optionsOrId.id;
+  const options = typeof optionsOrId === 'string' ? maybeOptions : optionsOrId;
 
   const {
     values,

@@ -12,11 +12,14 @@ export type LocaleDictionary = Record<string, LocaleDictionaryValue>;
 export type Dictionary = Record<string, LocaleDictionary>
 
 export interface MessageObject {
-  id: string
   locale?: string
   format?: string
   default?: string
   values?: Record<string, string | number | Date>
+}
+
+export interface MessageObjectWithId extends MessageObject {
+  id: string
 }
 
 export type JsonGetter = (
@@ -25,7 +28,7 @@ export type JsonGetter = (
 ) => any
 
 export type MessageFormatter = (
-  id: string | MessageObject,
+  id: string | MessageObjectWithId,
   options?: MessageObject
 ) => string
 

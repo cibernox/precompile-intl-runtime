@@ -10,14 +10,16 @@ export declare type LocaleDictionaryValue = string | ((...args: any[]) => string
 export declare type LocaleDictionary = Record<string, LocaleDictionaryValue>;
 export declare type Dictionary = Record<string, LocaleDictionary>;
 export interface MessageObject {
-    id: string;
     locale?: string;
     format?: string;
     default?: string;
     values?: Record<string, string | number | Date>;
 }
+export interface MessageObjectWithId extends MessageObject {
+    id: string;
+}
 export declare type JsonGetter = (id: string, locale?: string) => any;
-export declare type MessageFormatter = (id: string | MessageObject, options?: MessageObject) => string;
+export declare type MessageFormatter = (id: string | MessageObjectWithId, options?: MessageObject) => string;
 export declare type TimeFormatter = (d: Date | number, options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>) => string;
 export declare type DateFormatter = (d: Date | number, options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>) => string;
 export declare type NumberFormatter = (d: number, options?: IntlFormatterOptions<Intl.NumberFormatOptions>) => string;
