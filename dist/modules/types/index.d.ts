@@ -16,6 +16,7 @@ export interface MessageObject {
     default?: string;
     values?: Record<string, string | number | Date>;
 }
+export declare type JsonGetter = (id: string, locale?: string) => any;
 export declare type MessageFormatter = (id: string | MessageObject, options?: MessageObject) => string;
 export declare type TimeFormatter = (d: Date | number, options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>) => string;
 export declare type DateFormatter = (d: Date | number, options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>) => string;
