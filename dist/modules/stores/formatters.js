@@ -1,4 +1,3 @@
-// @ts-ignore
 import { derived } from "svelte/store";
 import { lookup } from '../includes/lookup';
 import { hasLocaleQueue } from '../includes/loaderQueue';
@@ -6,11 +5,9 @@ import { getTimeFormatter, getDateFormatter, getNumberFormatter, } from '../incl
 import { getOptions, getCurrentLocale, getPossibleLocales } from '../includes/utils';
 import { $dictionary } from './dictionary';
 import { $locale } from './locale';
-export const formatMessage = (id, options = { id: '#missing-message-id#' }) => {
-    if (typeof id === 'object') {
-        options = id;
-        id = options.id;
-    }
+export const formatMessage = (optionsOrId, maybeOptions = {}) => {
+    const id = typeof optionsOrId === 'string' ? optionsOrId : optionsOrId.id;
+    const options = typeof optionsOrId === 'string' ? maybeOptions : optionsOrId;
     const { values, locale = getCurrentLocale(), default: defaultValue, } = options;
     if (locale == null) {
         throw new Error('[svelte-i18n] Cannot format a message without first setting the initial locale.');
