@@ -62,7 +62,7 @@ export const formatMessage: MessageFormatter = (optionsOrId, maybeOptions= {}) =
 };
 
 export const getJSON: JsonGetter = (id, locale) => {
-  locale ||= getCurrentLocale();
+  locale = locale || getCurrentLocale();
   return lookup(id, locale) || id;
 }
 
