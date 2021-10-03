@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
-    "test": "jest test"
+    "test": "TZ=utc jest test"
   },
   "module": "dist/modules/index.js",
   "types": "dist/modules/index.d.ts",
