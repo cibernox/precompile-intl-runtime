@@ -28,7 +28,7 @@ export const formatMessage = (optionsOrId, maybeOptions = {}) => {
     return defaultValue || id;
 };
 export const getJSON = (id, locale) => {
-    locale ||= getCurrentLocale();
+    locale = locale || getCurrentLocale();
     return lookup(id, locale) || id;
 };
 export const formatTime = (t, options) => getTimeFormatter(options).format(t);
