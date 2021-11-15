@@ -26,6 +26,7 @@ import {
   formatNumber
 } from './stores/formatters';
 export {
+  formatMessage,
   $format as format,
   $format as _,
   $format as t,

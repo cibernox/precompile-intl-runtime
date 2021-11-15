@@ -1,3 +1,6 @@
+## 0.4.10
+- Export method (not a store) to generate a translation. Should almost never be used in the wild, as
+  it won't be reactive.
 ## 0.4.7
 - Fix typescript types
 ## 0.4.6
