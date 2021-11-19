@@ -1,3 +1,5 @@
+## 0.4.11
+- Update to latest version of typescript and babel-typescript.
 ## 0.4.10
 - Export method (not a store) to generate a translation. Should almost never be used in the wild, as
   it won't be reactive.
