@@ -2,7 +2,7 @@ const getFromQueryString = (queryString: string, key: string) => {
   const keyVal = queryString.split('&').find((i) => i.indexOf(`${key}=`) === 0);
 
   if (keyVal) {
-    return keyVal.split('=').pop();
+    return keyVal.split('=').pop() || null;
   }
 
   return null;
