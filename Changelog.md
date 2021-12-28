@@ -1,4 +1,4 @@
-## 0.4.13
+## 0.4.14
 - Make some types more strict
 ## 0.4.11
 - Update to latest version of typescript and babel-typescript.
