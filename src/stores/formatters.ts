@@ -33,7 +33,7 @@ export const formatMessage: MessageFormatter = (optionsOrId, maybeOptions= {}) =
 
   if (locale == null) {
     throw new Error(
-      '[svelte-i18n] Cannot format a message without first setting the initial locale.',
+      '[svelte-intl-precompile] Cannot format a message without first setting the initial locale.',
     );
   }
 
@@ -49,7 +49,7 @@ export const formatMessage: MessageFormatter = (optionsOrId, maybeOptions= {}) =
   if (getOptions().warnOnMissingMessages) {
     // istanbul ignore next
     console.warn(
-      `[svelte-i18n] The message "${id}" was not found in "${getPossibleLocales(
+      `[svelte-intl-precompile] The message "${id}" was not found in "${getPossibleLocales(
         locale,
       ).join('", "')}".${
         hasLocaleQueue(getCurrentLocale())
