@@ -10,7 +10,7 @@ export const formatMessage = (optionsOrId, maybeOptions = {}) => {
     const options = typeof optionsOrId === 'string' ? maybeOptions : optionsOrId;
     const { values, locale = getCurrentLocale(), default: defaultValue, } = options;
     if (locale == null) {
-        throw new Error('[svelte-i18n] Cannot format a message without first setting the initial locale.');
+        throw new Error('[svelte-intl-precompile] Cannot format a message without first setting the initial locale.');
     }
     let message = lookup(id, locale);
     if (typeof message === 'string') {
@@ -21,7 +21,7 @@ export const formatMessage = (optionsOrId, maybeOptions = {}) => {
     }
     if (getOptions().warnOnMissingMessages) {
         // istanbul ignore next
-        console.warn(`[svelte-i18n] The message "${id}" was not found in "${getPossibleLocales(locale).join('", "')}".${hasLocaleQueue(getCurrentLocale())
+        console.warn(`[svelte-intl-precompile] The message "${id}" was not found in "${getPossibleLocales(locale).join('", "')}".${hasLocaleQueue(getCurrentLocale())
             ? `\n\nNote: there are at least one loader still registered to this locale that wasn't executed.`
             : ''}`);
     }
