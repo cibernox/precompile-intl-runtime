@@ -1,3 +1,5 @@
+## next
+- Add getLocaleFromAcceptLanguageHeader for server side locale detection 
 ## 0.4.14
 - Make some types more strict
 ## 0.4.11

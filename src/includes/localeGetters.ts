@@ -54,3 +54,42 @@ export const getLocaleFromHash = (hash: string) => {
 
   return getFromQueryString(window.location.hash.substr(1), hash);
 };
+
+export const getLocaleFromAcceptLanguageHeader = (header: string | null, availableLocales?: string[]): string | null => {
+  // If header is null (i.e. does not exist) the fallbackLocale should be used
+  if (!header)
+    return null;
+
+  // Parse Accept-Language header
+  const locales = header
+      .split(',')
+      .map(locale => locale.trim())
+      .map(locale => {
+        const directives = locale.split(';q=');
+        return {
+          locale: directives[0],
+          quality: parseFloat(directives[1]) || 1.0
+        };
+      })
+      .sort((a, b) => b.quality - a.quality);
+
+  // If availableLocales is not defined return the first language from header
+  if (!availableLocales)
+    return locales[0].locale;
+
+  // Check full match
+  for (const locale of locales) {
+    if (availableLocales.includes(locale.locale))
+      return locale.locale;
+  }
+
+  // Check base language match
+  for (const locale of locales.filter(l => l.locale.includes('-'))) {
+    const base = locale.locale.split('-')[0];
+    if (availableLocales.includes(base))
+      return base;
+  }
+
+  // If no match found use fallbackLocale
+  return null;
+}
