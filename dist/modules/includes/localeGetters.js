@@ -47,7 +47,7 @@ export const getLocaleFromHash = (hash) => {
 export const getLocaleFromAcceptLanguageHeader = (header, availableLocales) => {
     // If header is null (i.e. does not exist) the fallbackLocale should be used
     if (!header)
-        return null;
+        return undefined;
     // Parse Accept-Language header
     const locales = header
         .split(',')
@@ -75,5 +75,5 @@ export const getLocaleFromAcceptLanguageHeader = (header, availableLocales) => {
             return base;
     }
     // If no match found use fallbackLocale
-    return null;
+    return undefined;
 };

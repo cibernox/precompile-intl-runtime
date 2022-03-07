@@ -55,10 +55,10 @@ export const getLocaleFromHash = (hash: string) => {
   return getFromQueryString(window.location.hash.substr(1), hash);
 };
 
-export const getLocaleFromAcceptLanguageHeader = (header: string | null, availableLocales?: string[]): string | null => {
+export const getLocaleFromAcceptLanguageHeader = (header: string | null, availableLocales?: string[]): string | undefined => {
   // If header is null (i.e. does not exist) the fallbackLocale should be used
   if (!header)
-    return null;
+    return undefined;
 
   // Parse Accept-Language header
   const locales = header
@@ -91,5 +91,5 @@ export const getLocaleFromAcceptLanguageHeader = (header: string | null, availab
   }
 
   // If no match found use fallbackLocale
-  return null;
+  return undefined;
 }
