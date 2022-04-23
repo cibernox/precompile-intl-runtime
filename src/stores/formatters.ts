@@ -21,13 +21,13 @@ import { getOptions, getCurrentLocale, getPossibleLocales } from '../includes/ut
 import { $dictionary } from './dictionary'
 import { $locale } from './locale'
 
-export const formatMessage: MessageFormatter = (optionsOrId, maybeOptions= {}) => {
+export const formatMessage: MessageFormatter = (currentLocale, optionsOrId, maybeOptions= {}) => {
   const id = typeof optionsOrId === 'string' ? optionsOrId : optionsOrId.id;
   const options = typeof optionsOrId === 'string' ? maybeOptions : optionsOrId;
 
   const {
     values,
-    locale = getCurrentLocale(),
+    locale = currentLocale || getCurrentLocale(),
     default: defaultValue,
   } = options;
 
@@ -75,7 +75,7 @@ export const formatDate: DateFormatter = (d, options) =>
 export const formatNumber: NumberFormatter = (n, options) =>
   getNumberFormatter(options).format(n)
 
-export const $format = /*@__PURE__*/derived([$locale, $dictionary], () => formatMessage);
+export const $format = /*@__PURE__*/derived([$locale, $dictionary], (currentLocale) => formatMessage.bind(currentLocale));
 export const $formatTime = /*@__PURE__*/derived([$locale], () => formatTime);
 export const $formatDate = /*@__PURE__*/derived([$locale], () => formatDate);
 export const $formatNumber = /*@__PURE__*/derived([$locale], () => formatNumber);
