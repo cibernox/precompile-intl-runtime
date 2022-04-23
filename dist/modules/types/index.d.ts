@@ -19,7 +19,7 @@ export interface MessageObjectWithId extends MessageObject {
     id: string;
 }
 export declare type JsonGetter = (id: string, locale?: string) => any;
-export declare type MessageFormatter = (id: string | MessageObjectWithId, options?: MessageObject) => string;
+export declare type MessageFormatter = (currentLocale: string, id: string | MessageObjectWithId, options?: MessageObject) => string;
 export declare type TimeFormatter = (d: Date | number, options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>) => string;
 export declare type DateFormatter = (d: Date | number, options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>) => string;
 export declare type NumberFormatter = (d: number, options?: IntlFormatterOptions<Intl.NumberFormatOptions>) => string;

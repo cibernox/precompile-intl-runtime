@@ -5,10 +5,10 @@ import { getTimeFormatter, getDateFormatter, getNumberFormatter, } from '../incl
 import { getOptions, getCurrentLocale, getPossibleLocales } from '../includes/utils';
 import { $dictionary } from './dictionary';
 import { $locale } from './locale';
-export const formatMessage = (optionsOrId, maybeOptions = {}) => {
+export const formatMessage = (currentLocale, optionsOrId, maybeOptions = {}) => {
     const id = typeof optionsOrId === 'string' ? optionsOrId : optionsOrId.id;
     const options = typeof optionsOrId === 'string' ? maybeOptions : optionsOrId;
-    const { values, locale = getCurrentLocale(), default: defaultValue, } = options;
+    const { values, locale = currentLocale || getCurrentLocale(), default: defaultValue, } = options;
     if (locale == null) {
         throw new Error('[svelte-intl-precompile] Cannot format a message without first setting the initial locale.');
     }
@@ -34,7 +34,7 @@ export const getJSON = (id, locale) => {
 export const formatTime = (t, options) => getTimeFormatter(options).format(t);
 export const formatDate = (d, options) => getDateFormatter(options).format(d);
 export const formatNumber = (n, options) => getNumberFormatter(options).format(n);
-export const $format = /*@__PURE__*/ derived([$locale, $dictionary], () => formatMessage);
+export const $format = /*@__PURE__*/ derived([$locale, $dictionary], (currentLocale) => formatMessage.bind(currentLocale));
 export const $formatTime = /*@__PURE__*/ derived([$locale], () => formatTime);
 export const $formatDate = /*@__PURE__*/ derived([$locale], () => formatDate);
 export const $formatNumber = /*@__PURE__*/ derived([$locale], () => formatNumber);
