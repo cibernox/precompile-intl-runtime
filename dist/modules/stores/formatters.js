@@ -34,7 +34,7 @@ export const getJSON = (id, locale) => {
 export const formatTime = (t, options) => getTimeFormatter(options).format(t);
 export const formatDate = (d, options) => getDateFormatter(options).format(d);
 export const formatNumber = (n, options) => getNumberFormatter(options).format(n);
-export const $format = /*@__PURE__*/ derived([$locale, $dictionary], (currentLocale) => formatMessage.bind(currentLocale));
+export const $format = /*@__PURE__*/ derived([$locale, $dictionary], ([currentLocale]) => formatMessage.bind(null, currentLocale));
 export const $formatTime = /*@__PURE__*/ derived([$locale], () => formatTime);
 export const $formatDate = /*@__PURE__*/ derived([$locale], () => formatDate);
 export const $formatNumber = /*@__PURE__*/ derived([$locale], () => formatNumber);

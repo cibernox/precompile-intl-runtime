@@ -2,12 +2,10 @@ import { derived } from "svelte/store";
 
 import {
   MessageFormatter,
-  MessageObject,
   TimeFormatter,
   DateFormatter,
   NumberFormatter,
   JsonGetter,
-  MessageObjectWithId,
 } from '../types/index'
 import { lookup } from '../includes/lookup'
 import { hasLocaleQueue } from '../includes/loaderQueue'
@@ -75,7 +73,7 @@ export const formatDate: DateFormatter = (d, options) =>
 export const formatNumber: NumberFormatter = (n, options) =>
   getNumberFormatter(options).format(n)
 
-export const $format = /*@__PURE__*/derived([$locale, $dictionary], (currentLocale) => formatMessage.bind(currentLocale));
+export const $format = /*@__PURE__*/derived([$locale, $dictionary], ([currentLocale]) => formatMessage.bind(null, currentLocale));
 export const $formatTime = /*@__PURE__*/derived([$locale], () => formatTime);
 export const $formatDate = /*@__PURE__*/derived([$locale], () => formatDate);
 export const $formatNumber = /*@__PURE__*/derived([$locale], () => formatNumber);

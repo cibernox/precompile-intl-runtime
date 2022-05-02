@@ -1,3 +1,5 @@
+## 0.5.1
+- Fix bug in 0.5.0.
 ## 0.5.0
 - Ensure that `formatMessage` reacts to language changes bu returning a new function every time the locale changes.
 ## 0.4.14
