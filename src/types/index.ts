@@ -28,6 +28,7 @@ export type JsonGetter = (
 ) => any
 
 export type MessageFormatter = (
+  currentLocale: string,
   id: string | MessageObjectWithId,
   options?: MessageObject
 ) => string
