@@ -1,3 +1,5 @@
+## next
+- Add getLocaleFromAcceptLanguageHeader for server side locale detection 
 ## 0.5.1
 - Fix bug in 0.5.0.
 ## 0.5.0
