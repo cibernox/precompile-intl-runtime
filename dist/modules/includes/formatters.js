@@ -12,10 +12,12 @@ export const getNumberFormatter = monadicMemoize(({ locale, format, ...options }
     if (locale == null) {
         throw new Error('[precompile-intl-runtime] A "locale" must be set to format numbers');
     }
-    if (format) {
-        options = getIntlFormatterOptions('number', format);
+    if (typeof format === 'string') {
+        return new Intl.NumberFormat(locale, getIntlFormatterOptions('number', format));
     }
-    return new Intl.NumberFormat(locale, options);
+    else {
+        return new Intl.NumberFormat(locale, format);
+    }
 });
 export const getDateFormatter = monadicMemoize(({ locale, format, ...options } = {}) => {
     locale = locale || getCurrentLocale();
