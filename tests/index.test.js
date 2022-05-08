@@ -174,13 +174,15 @@ describe("__number", function() {
     });
 
   it('accepts "scientific", "engineering", "compactLong" and "compactShort" as second argument', function() {
-    expect(__number(12345678, { notation: "scientific" })).toBe("1.235E7");
-    expect(__number(12345678, { notation: "engineering" })).toBe("12.346E6");
+    expect(__number(12345678, "scientific")).toBe("1.235E7");
+    expect(__number(12345678, "engineering")).toBe("12.346E6");
     expect(__number(12345678, "compactLong")).toBe("12 million");
     expect(__number(12345678, "compactShort")).toBe("12M");
   });
 
   it('accepts options from parsing a number skeleton as second argument', function() {
+    expect(__number(12345678, { notation: "scientific" })).toBe("1.235E7");
+    expect(__number(12345678, { notation: "engineering" })).toBe("12.346E6");
     expect(__number(25, { style: "percent" })).toBe("2,500%");
     expect(__number(25, { style: "percent", minimumFractionDigits: 2, maximumFractionDigits: 2 })).toBe("2,500.00%");
     expect(__number(25, { style: "currency", currency: "EUR" })).toBe("€25.00");
