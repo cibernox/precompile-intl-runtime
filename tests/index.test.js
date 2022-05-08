@@ -173,7 +173,7 @@ describe("__number", function() {
     expect(__number(12345678)).toBe("12.345.678");
     });
 
-  it('accepts "scientific", "engineering", "compactLong" and "compactShort" as second argument', function() {
+  it('accepts "scientific", "engineering", "compactLong" and "compactShort" as second argument because there those were defined as known formats', function() {
     expect(__number(12345678, "scientific")).toBe("1.235E7");
     expect(__number(12345678, "engineering")).toBe("12.346E6");
     expect(__number(12345678, "compactLong")).toBe("12 million");
