@@ -1,5 +1,7 @@
 ## next
-- Add getLocaleFromAcceptLanguageHeader for server side locale detection 
+## 0.6.0-beta.0
+- Add getLocaleFromAcceptLanguageHeader for server side locale detection
+- Support number skeletons. Support might not be complete.
 ## 0.5.1
 - Fix bug in 0.5.0.
 ## 0.5.0
