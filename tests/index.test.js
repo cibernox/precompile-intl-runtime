@@ -173,11 +173,23 @@ describe("__number", function() {
     expect(__number(12345678)).toBe("12.345.678");
     });
 
-  it('accepts "scientific", "engineering", "compactLong" and "compactShort" as second argument', function() {
+  it('accepts "scientific", "engineering", "compactLong" and "compactShort" as second argument because there those were defined as known formats', function() {
     expect(__number(12345678, "scientific")).toBe("1.235E7");
     expect(__number(12345678, "engineering")).toBe("12.346E6");
     expect(__number(12345678, "compactLong")).toBe("12 million");
     expect(__number(12345678, "compactShort")).toBe("12M");
+  });
+
+  it('accepts options from parsing a number skeleton as second argument', function() {
+    expect(__number(12345678, { notation: "scientific" })).toBe("1.235E7");
+    expect(__number(12345678, { notation: "engineering" })).toBe("12.346E6");
+    expect(__number(25, { style: "percent" })).toBe("2,500%");
+    expect(__number(25, { style: "percent", minimumFractionDigits: 2, maximumFractionDigits: 2 })).toBe("2,500.00%");
+    expect(__number(25, { style: "currency", currency: "EUR" })).toBe("€25.00");
+    expect(__number(123456789, { notation: "scientific", signDisplay: "always" })).toBe("+1.235E8");
+    expect(__number(123456789, { notation: "engineering", signDisplay: "always" })).toBe("+123.457E6");
+    expect(__number(123456789, { style: "unit", unit: "kilometer" })).toBe("123,456,789 km");
+    expect(__number(123456789, { style: "unit", unit: "kilometer", unitDisplay: 'long' })).toBe("123,456,789 kilometers");
   });
 
   it("accepts custom formats preconfigured when the library was initialized", function() {

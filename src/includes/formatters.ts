@@ -23,11 +23,11 @@ export const getNumberFormatter: MemoizedIntlFormatter<
     throw new Error('[precompile-intl-runtime] A "locale" must be set to format numbers')
   }
 
-  if (format) {
-    options = getIntlFormatterOptions('number', format)
+  if (typeof format === 'string') {
+    return new Intl.NumberFormat(locale, getIntlFormatterOptions('number', format))
+  } else {
+    return new Intl.NumberFormat(locale, format)
   }
-
-  return new Intl.NumberFormat(locale, options)
 })
 
 export const getDateFormatter: MemoizedIntlFormatter<
