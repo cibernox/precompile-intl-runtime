@@ -3,6 +3,7 @@ import { writable, derived } from 'svelte/store';
 import { LocaleDictionary, LocaleDictionaryValue, DeepDictionary, Dictionary }
   from '../types/index';
 import { getPossibleLocales } from '../includes/utils';
+import { delve } from '../shared/delve';
 
 let dictionary: Dictionary
 const $dictionary = writable<Dictionary>({})
@@ -19,23 +20,17 @@ export function hasLocaleDictionary(locale: string) {
   return locale in dictionary
 }
 
-export function getMessageFromDictionary(locale: string, id: string) {
-  if (hasLocaleDictionary(locale)) {
-    const localeDictionary = getLocaleDictionary(locale)
-    if (id in localeDictionary) {
-      return localeDictionary[id]
-    }
 
-    const ids = id.split('.')
-    let tmpDict: any = localeDictionary
-    for (let i = 0; i < ids.length; i++) {
-      if (typeof tmpDict[ids[i]] !== 'object') {
-        return (tmpDict[ids[i]] as LocaleDictionaryValue) || null
-      }
-      tmpDict = tmpDict[ids[i]];
-    }
+export function getMessageFromDictionary(locale: string, id: string) {
+  if (!hasLocaleDictionary(locale)) {
+    return null;
   }
-  return null
+
+  const localeDictionary = getLocaleDictionary(locale);
+
+  const match = delve(localeDictionary, id);
+
+  return match;
 }
 
 

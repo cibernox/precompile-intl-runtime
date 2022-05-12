@@ -1,6 +1,7 @@
 // @ts-ignore
 import { writable, derived } from 'svelte/store';
 import { getPossibleLocales } from '../includes/utils';
+import { delve } from '../shared/delve';
 let dictionary;
 const $dictionary = writable({});
 export function getLocaleDictionary(locale) {
@@ -13,21 +14,12 @@ export function hasLocaleDictionary(locale) {
     return locale in dictionary;
 }
 export function getMessageFromDictionary(locale, id) {
-    if (hasLocaleDictionary(locale)) {
-        const localeDictionary = getLocaleDictionary(locale);
-        if (id in localeDictionary) {
-            return localeDictionary[id];
-        }
-        const ids = id.split('.');
-        let tmpDict = localeDictionary;
-        for (let i = 0; i < ids.length; i++) {
-            if (typeof tmpDict[ids[i]] !== 'object') {
-                return tmpDict[ids[i]] || null;
-            }
-            tmpDict = tmpDict[ids[i]];
-        }
+    if (!hasLocaleDictionary(locale)) {
+        return null;
     }
-    return null;
+    const localeDictionary = getLocaleDictionary(locale);
+    const match = delve(localeDictionary, id);
+    return match;
 }
 export function getClosestAvailableLocale(refLocale) {
     if (refLocale == null)
