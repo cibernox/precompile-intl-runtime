@@ -1,4 +1,6 @@
 ## next
+## 0.6.0
+- No changes since 0.6.0-beta.0
 ## 0.6.0-beta.0
 - Add getLocaleFromAcceptLanguageHeader for server side locale detection
 - Support number skeletons. Support might not be complete.
