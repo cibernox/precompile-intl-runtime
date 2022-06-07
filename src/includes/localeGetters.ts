@@ -77,21 +77,60 @@ export const getLocaleFromAcceptLanguageHeader = (header: string | null, availab
   if (!availableLocales || availableLocales.length === 0)
     return locales[0].locale;
 
-  availableLocales = availableLocales.map(l => l.toLowerCase());
+  locales.forEach(l => l.locale = l.locale.toLowerCase());
 
-  // Check full match
+  let firstAvailableBaseMatch: {match: string; base: string} | undefined;
+
+  // Check languages
   for (const locale of locales) {
-    if (availableLocales.includes(locale.locale.toLowerCase()))
-      return locale.locale;
+    if (firstAvailableBaseMatch && !locale.locale.toLowerCase().startsWith(`${firstAvailableBaseMatch.base}-`)) {
+      continue;
+    }
+
+    // Full match
+    const fullMatch = getArrayElementCaseInsensitive(availableLocales, locale.locale);
+    if (fullMatch) {
+      return fullMatch;
+    }
+
+    if (firstAvailableBaseMatch) {
+      continue;
+    }
+
+    // header base match
+    const baseMatch = getArrayElementCaseInsensitive(availableLocales, locale.locale.split('-')[0]);
+    if (baseMatch) {
+      return baseMatch;
+    }
+
+    // available base match
+    for (const availableLocale of availableLocales) {
+      const availableBase = availableLocale.split('-')[0];
+      if (availableBase.toLowerCase() === locale.locale) {
+        // Remember base match to check if full match with same base exists
+        firstAvailableBaseMatch = {
+          match: availableLocale,
+          base: locale.locale
+        }
+        break;
+      }
+    }
   }
 
-  // Check base language match
-  for (const locale of locales.filter(l => l.locale.includes('-'))) {
-    const base = locale.locale.split('-')[0];
-    if (availableLocales.includes(base.toLowerCase()))
-      return base;
+  if (firstAvailableBaseMatch !== undefined) {
+    return firstAvailableBaseMatch.match;
   }
 
   // If no match found use fallbackLocale
+  return undefined;
+}
+
+function getArrayElementCaseInsensitive(array: string[], searchElement: string): string | undefined {
+  searchElement = searchElement.toLowerCase();
+  for (const element of array) {
+    if (element.toLowerCase() === searchElement) {
+      return element;
+    }
+  }
   return undefined;
 }
