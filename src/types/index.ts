@@ -34,16 +34,19 @@ export type MessageFormatter = (
 ) => string
 
 export type TimeFormatter = (
+  currentLocale: string,
   d: Date | number,
   options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>
 ) => string
 
 export type DateFormatter = (
+  currentLocale: string,
   d: Date | number,
   options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>
 ) => string
 
 export type NumberFormatter = (
+  currentLocale: string,
   d: number,
   options?: IntlFormatterOptions<Intl.NumberFormatOptions>
 ) => string
