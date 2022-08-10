@@ -20,9 +20,9 @@ export interface MessageObjectWithId extends MessageObject {
 }
 export declare type JsonGetter = (id: string, locale?: string) => any;
 export declare type MessageFormatter = (currentLocale: string, id: string | MessageObjectWithId, options?: MessageObject) => string;
-export declare type TimeFormatter = (d: Date | number, options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>) => string;
-export declare type DateFormatter = (d: Date | number, options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>) => string;
-export declare type NumberFormatter = (d: number, options?: IntlFormatterOptions<Intl.NumberFormatOptions>) => string;
+export declare type TimeFormatter = (currentLocale: string, d: Date | number, options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>) => string;
+export declare type DateFormatter = (currentLocale: string, d: Date | number, options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>) => string;
+export declare type NumberFormatter = (currentLocale: string, d: number, options?: IntlFormatterOptions<Intl.NumberFormatOptions>) => string;
 declare type IntlFormatterOptions<T> = T & {
     format?: string;
     locale?: string;

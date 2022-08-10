@@ -34,11 +34,11 @@ export function __select(value, opts) {
     return opts[value] || opts['other'] || '';
 }
 export function __number(value, format) {
-    return formatNumber(value, { locale: getCurrentLocale(), format });
+    return formatNumber(getCurrentLocale(), value, { format });
 }
 export function __date(value, format = "short") {
-    return formatDate(value, { format, locale: getCurrentLocale() });
+    return formatDate(getCurrentLocale(), value, { format });
 }
 export function __time(value, format = "short") {
-    return formatTime(value, { format, locale: getCurrentLocale() });
+    return formatTime(getCurrentLocale(), value, { format });
 }
