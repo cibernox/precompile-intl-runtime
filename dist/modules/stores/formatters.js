@@ -31,11 +31,20 @@ export const getJSON = (id, locale) => {
     locale = locale || getCurrentLocale();
     return lookup(id, locale) || id;
 };
-export const formatTime = (t, options) => getTimeFormatter(options).format(t);
-export const formatDate = (d, options) => getDateFormatter(options).format(d);
-export const formatNumber = (n, options) => getNumberFormatter(options).format(n);
+export const formatTime = (currentLocale, t, options) => {
+    const locale = currentLocale || getCurrentLocale();
+    return getTimeFormatter({ locale, ...options }).format(t);
+};
+export const formatDate = (currentLocale, d, options) => {
+    const locale = currentLocale || getCurrentLocale();
+    return getDateFormatter({ locale, ...options }).format(d);
+};
+export const formatNumber = (currentLocale, n, options) => {
+    const locale = currentLocale || getCurrentLocale();
+    return getNumberFormatter({ locale, ...options }).format(n);
+};
 export const $format = /*@__PURE__*/ derived([$locale, $dictionary], ([currentLocale]) => formatMessage.bind(null, currentLocale));
-export const $formatTime = /*@__PURE__*/ derived([$locale], () => formatTime);
-export const $formatDate = /*@__PURE__*/ derived([$locale], () => formatDate);
-export const $formatNumber = /*@__PURE__*/ derived([$locale], () => formatNumber);
+export const $formatTime = /*@__PURE__*/ derived([$locale], ([currentLocale]) => formatTime.bind(null, currentLocale));
+export const $formatDate = /*@__PURE__*/ derived([$locale], ([currentLocale]) => formatDate.bind(null, currentLocale));
+export const $formatNumber = /*@__PURE__*/ derived([$locale], ([currentLocale]) => formatNumber.bind(null, currentLocale));
 export const $getJSON = /*@__PURE__*/ derived([$locale, $dictionary], () => getJSON);
