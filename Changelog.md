@@ -1,4 +1,7 @@
 ## next
+## 0.8.0
+- Ensure that `$date`, `$time` and `$number` react to language changes by returning a new function every time the locale changes.
+
 ## 0.7.0
 - Updated logic of `getLocaleFromAcceptLanguageHeader` to return a "sibling" regional variant before moving to the next base language.
   E.g. `fr,fr-CA;q=0.9,en;q=0.8` when the available locales are `fr-FR`, `en` will return `fr-FR` because it's a "sibling" variant of `fr-CA`.
@@ -10,7 +13,7 @@
 ## 0.5.1
 - Fix bug in 0.5.0.
 ## 0.5.0
-- Ensure that `formatMessage` reacts to language changes bu returning a new function every time the locale changes.
+- Ensure that `formatMessage` reacts to language changes by returning a new function every time the locale changes.
 ## 0.4.14
 - Make some types more strict
 ## 0.4.11
