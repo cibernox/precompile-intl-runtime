@@ -26,7 +26,7 @@ export const getNumberFormatter: MemoizedIntlFormatter<
   if (typeof format === 'string') {
     return new Intl.NumberFormat(locale, getIntlFormatterOptions('number', format))
   } else {
-    return new Intl.NumberFormat(locale, format)
+    return new Intl.NumberFormat(locale, options)
   }
 })
 
