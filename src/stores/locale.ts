@@ -10,7 +10,9 @@ $locale.subscribe((newLocale: string) => {
   setCurrentLocale(newLocale)
 
   if (typeof window !== 'undefined') {
-    document.documentElement.setAttribute('lang', newLocale)
+    if (newLocale !== '') {
+      document.documentElement.setAttribute('lang', newLocale)
+    }
   }
 })
 
