@@ -6,7 +6,9 @@ const $locale = writable('');
 $locale.subscribe((newLocale) => {
     setCurrentLocale(newLocale);
     if (typeof window !== 'undefined') {
-        document.documentElement.setAttribute('lang', newLocale);
+        if (newLocale !== '') {
+            document.documentElement.setAttribute('lang', newLocale);
+        }
     }
 });
 const localeSet = $locale.set;

@@ -16,7 +16,7 @@ export const getNumberFormatter = monadicMemoize(({ locale, format, ...options }
         return new Intl.NumberFormat(locale, getIntlFormatterOptions('number', format));
     }
     else {
-        return new Intl.NumberFormat(locale, format);
+        return new Intl.NumberFormat(locale, options);
     }
 });
 export const getDateFormatter = monadicMemoize(({ locale, format, ...options } = {}) => {

@@ -1,4 +1,6 @@
 ## next
+## 0.8.1
+- Don't set `document.lang` if the value being set is an empty string.
 ## 0.8.0
 - Ensure that `$date`, `$time` and `$number` react to language changes by returning a new function every time the locale changes.
 
