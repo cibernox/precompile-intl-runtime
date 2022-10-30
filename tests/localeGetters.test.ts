@@ -1,4 +1,5 @@
-import {getLocaleFromAcceptLanguageHeader} from "../dist/modules";
+import {getLocaleFromAcceptLanguageHeader} from "../src/index";
+import { describe, it, expect } from "@jest/globals";
 
 describe('getLocaleFromAcceptLanguageHeader', () => {
   it.each([

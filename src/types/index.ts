@@ -51,7 +51,7 @@ export type NumberFormatter = (
   options?: IntlFormatterOptions<Intl.NumberFormatOptions>
 ) => string
 
-type IntlFormatterOptions<T> = T & {
+export type IntlFormatterOptions<T> = T & {
   format?: string
   locale?: string
 }

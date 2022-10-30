@@ -23,7 +23,7 @@ export declare type MessageFormatter = (currentLocale: string, id: string | Mess
 export declare type TimeFormatter = (currentLocale: string, d: Date | number, options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>) => string;
 export declare type DateFormatter = (currentLocale: string, d: Date | number, options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>) => string;
 export declare type NumberFormatter = (currentLocale: string, d: number, options?: IntlFormatterOptions<Intl.NumberFormatOptions>) => string;
-declare type IntlFormatterOptions<T> = T & {
+export declare type IntlFormatterOptions<T> = T & {
     format?: string;
     locale?: string;
 };

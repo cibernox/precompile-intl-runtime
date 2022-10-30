@@ -15,8 +15,10 @@ import {
   time,
   date,
   number,
-  json
-} from "../dist/modules";
+  json,
+  PluralOptions
+} from "../src/index";
+import { describe, it, expect, beforeEach } from "@jest/globals";
 
 describe('Timezones', () => {
   it('should always be UTC', () => {
@@ -26,7 +28,7 @@ describe('Timezones', () => {
 });
 
 beforeEach(() => {
-  locale.set(undefined);
+  locale.set(undefined as unknown as string);
   dictionary.set({});
   init({
     fallbackLocale: "en",
@@ -59,7 +61,7 @@ describe('__interpolate', function() {
 describe('__plural', function() {
   it("works respecting the pluralization rules of the current locale", () => {
     locale.set('en-US');
-    let pluralizations = {
+    let pluralizations: PluralOptions = {
       z: "no cats",
       o: "one cat",
       t: "a couple cats",

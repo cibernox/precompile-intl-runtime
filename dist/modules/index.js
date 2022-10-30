@@ -17,12 +17,12 @@ export { getDateFormatter, getNumberFormatter, getTimeFormatter, } from './inclu
 export function __interpolate(value) {
     return value === 0 ? 0 : value || '';
 }
-const PLURAL_RULES = Object.create(null);
+const PLURAL_RULES = {};
 function getLocalPluralFor(v) {
     let loc = getCurrentLocale();
     let pluralRules = PLURAL_RULES[loc] || (PLURAL_RULES[loc] = new Intl.PluralRules(loc));
     let key = pluralRules.select(v);
-    return key === 'other' ? 'h' : key[0];
+    return key === "other" ? "h" : key[0];
 }
 export function __offsetPlural(value, offset, opts) {
     return opts[value] || opts[getLocalPluralFor(value - offset)] || "";
@@ -34,7 +34,7 @@ export function __select(value, opts) {
     return opts[value] || opts['other'] || '';
 }
 export function __number(value, format) {
-    return formatNumber(getCurrentLocale(), value, { format });
+    return formatNumber(getCurrentLocale(), value, typeof format === "string" ? { format } : format);
 }
 export function __date(value, format = "short") {
     return formatDate(getCurrentLocale(), value, { format });
