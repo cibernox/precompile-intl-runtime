@@ -3,6 +3,7 @@ interface Formats {
   number: Record<string, any>
   date: Record<string, any>
   time: Record<string, any>
+  dateTime: Record<string, any>
 }
 interface Options {
   fallbackLocale: string
@@ -12,6 +13,35 @@ interface Options {
   warnOnMissingMessages: boolean
 }
 
+export const dateFormats = {
+  short: { month: 'numeric', day: 'numeric', year: '2-digit' },
+  medium: { month: 'short', day: 'numeric', year: 'numeric' },
+  long: { month: 'long', day: 'numeric', year: 'numeric' },
+  full: { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' },
+} as const;
+
+export const timeFormats = {
+  short: { hour: 'numeric', minute: 'numeric' },
+  medium: { hour: 'numeric', minute: 'numeric', second: 'numeric' },
+  long: {
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    timeZoneName: 'short',
+  },
+  full: {
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    timeZoneName: 'short',
+  },
+} as const;
+
+const dateTimeFormat = Object.fromEntries(
+  (["short", "medium", "long", "full"] as const)
+  .map(f => [f, { dateStyle: dateFormats[f], timeStyle: timeFormats[f] }])
+);
+
 export const defaultFormats: Formats = {
   number: {
     scientific: { notation: 'scientific' },
@@ -19,28 +49,9 @@ export const defaultFormats: Formats = {
     compactLong: { notation: 'compact', compactDisplay: 'long' },
     compactShort: { notation: 'compact', compactDisplay: 'short' },
   },
-  date: {
-    short: { month: 'numeric', day: 'numeric', year: '2-digit' },
-    medium: { month: 'short', day: 'numeric', year: 'numeric' },
-    long: { month: 'long', day: 'numeric', year: 'numeric' },
-    full: { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' },
-  },
-  time: {
-    short: { hour: 'numeric', minute: 'numeric' },
-    medium: { hour: 'numeric', minute: 'numeric', second: 'numeric' },
-    long: {
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-      timeZoneName: 'short',
-    },
-    full: {
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-      timeZoneName: 'short',
-    },
-  },
+  date: dateFormats,
+  time: timeFormats,
+  dateTime: dateTimeFormat,
 }
 
 const defaultOptions: Options = {

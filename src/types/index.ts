@@ -45,6 +45,12 @@ export type DateFormatter = (
   options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>
 ) => string
 
+export type DateTimeFormatter = (
+  currentLocale: string,
+  d: Date | number,
+  options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>
+) => string
+
 export type NumberFormatter = (
   currentLocale: string,
   d: number,

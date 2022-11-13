@@ -3,7 +3,7 @@ import { getOptions, getCurrentLocale } from './utils';
 import { monadicMemoize } from './memoize'
 
 const getIntlFormatterOptions = (
-  type: 'time' | 'number' | 'date',
+  type: 'time' | 'number' | 'date' | 'dateTime',
   name: string
 ): any => {
   const { formats } = getOptions();
@@ -63,6 +63,26 @@ export const getTimeFormatter: MemoizedIntlFormatter<
     options = getIntlFormatterOptions('time', format);
   } else if (Object.keys(options).length === 0) {
     options = getIntlFormatterOptions('time', 'short')
+  }
+
+  return new Intl.DateTimeFormat(locale, options)
+})
+
+export const getDateTimeFormatter: MemoizedIntlFormatter<
+  Intl.DateTimeFormat,
+  Intl.DateTimeFormatOptions
+> = monadicMemoize(({ locale, format, ...options } = {}) => {
+  locale = locale || getCurrentLocale()
+  if (locale == null) {
+    throw new Error(
+      '[precompile-intl-runtime] A "locale" must be set to format datetime values'
+    )
+  }
+
+  if (format) {
+    options = getIntlFormatterOptions('dateTime', format);
+  } else if (Object.keys(options).length === 0) {
+    options = getIntlFormatterOptions('dateTime', 'short')
   }
 
   return new Intl.DateTimeFormat(locale, options)

@@ -18,6 +18,9 @@ export function init(opts: ConfigureOptions) {
     if ('time' in formats) {
       Object.assign(options.formats.time, formats.time)
     }
+    if ('dateTime' in formats) {
+      Object.assign(options.formats.dateTime, formats.dateTime)
+    }
   }
 
   return $locale.set(initialLocale)

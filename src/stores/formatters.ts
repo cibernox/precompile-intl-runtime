@@ -4,6 +4,7 @@ import {
   MessageFormatter,
   TimeFormatter,
   DateFormatter,
+  DateTimeFormatter,
   NumberFormatter,
   JsonGetter,
 } from '../types/index'
@@ -12,6 +13,7 @@ import { hasLocaleQueue } from '../includes/loaderQueue'
 import {
   getTimeFormatter,
   getDateFormatter,
+  getDateTimeFormatter,
   getNumberFormatter,
 } from '../includes/formatters'
 import { getOptions, getCurrentLocale, getPossibleLocales } from '../includes/utils';
@@ -74,6 +76,11 @@ export const formatDate: DateFormatter = (currentLocale, d, options) => {
   return getDateFormatter({ locale, ...options }).format(d);
 }
 
+export const formatDateTime: DateTimeFormatter = (currentLocale, dt, options) => {
+  const locale = currentLocale || getCurrentLocale();
+  return getDateTimeFormatter({ locale, ...options }).format(dt)
+}
+
 export const formatNumber: NumberFormatter = (currentLocale, n, options) => {
   const locale = currentLocale || getCurrentLocale();
   return getNumberFormatter({ locale, ...options }).format(n)
@@ -82,5 +89,6 @@ export const formatNumber: NumberFormatter = (currentLocale, n, options) => {
 export const $format = /*@__PURE__*/derived([$locale, $dictionary], ([currentLocale]) => formatMessage.bind(null, currentLocale));
 export const $formatTime = /*@__PURE__*/derived([$locale], ([currentLocale]) => formatTime.bind(null, currentLocale));
 export const $formatDate = /*@__PURE__*/derived([$locale], ([currentLocale]) => formatDate.bind(null, currentLocale));
+export const $formatDateTime = /*@__PURE__*/derived([$locale], ([currentLocale]) => formatDateTime.bind(null, currentLocale));
 export const $formatNumber = /*@__PURE__*/derived([$locale], ([currentLocale]) => formatNumber.bind(null, currentLocale));
 export const $getJSON = /*@__PURE__*/derived([$locale, $dictionary], () => getJSON);

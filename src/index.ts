@@ -23,6 +23,7 @@ export { $isLoading as isLoading } from './stores/loading'
 import {
   formatTime,
   formatDate,
+  formatDateTime,
   formatNumber
 } from './stores/formatters';
 export {
@@ -33,6 +34,7 @@ export {
   $formatDate as date,
   $formatNumber as number,
   $formatTime as time,
+  $formatDateTime as dateTime,
   $getJSON as json,
 } from './stores/formatters'
 
@@ -41,6 +43,7 @@ export {
   getDateFormatter,
   getNumberFormatter,
   getTimeFormatter,
+  getDateTimeFormatter,
 } from './includes/formatters'
 
 
@@ -79,4 +82,8 @@ export function __date(value: Date, format = "short"): string {
 
 export function __time(value: Date, format = "short"): string {
   return formatTime(getCurrentLocale(), value, { format });
+}
+
+export function __dateTime(value: Date, format = "short"): string {
+  return formatDateTime(getCurrentLocale(), value, { format });
 }
