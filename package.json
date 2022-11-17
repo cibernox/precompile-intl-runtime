@@ -13,7 +13,7 @@
     "test": "TZ=utc jest test",
     "prepublish": "npm run build"
   },
-  "main": "dist/commonjs/index.js",
+  "type": "module",
   "module": "dist/modules/index.js",
   "types": "dist/modules/index.d.ts",
   "peerDependencies": {
