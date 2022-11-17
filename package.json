@@ -16,6 +16,12 @@
   "type": "module",
   "module": "dist/modules/index.js",
   "types": "dist/modules/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/modules/index.js",
+      "types": "./dist/modules/index.d.ts"
+    }
+  },
   "peerDependencies": {
     "svelte": "^3.37.0"
   },
