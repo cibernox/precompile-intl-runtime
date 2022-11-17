@@ -13,15 +13,9 @@
     "test": "TZ=utc jest test",
     "prepublish": "npm run build"
   },
-  "type": "module",
+  "main": "dist/commonjs/index.js",
   "module": "dist/modules/index.js",
   "types": "dist/modules/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/modules/index.js",
-      "types": "./dist/modules/index.d.ts"
-    }
-  },
   "peerDependencies": {
     "svelte": "^3.37.0"
   },
