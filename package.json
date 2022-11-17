@@ -1,11 +1,11 @@
 {
-  "name": "precompile-intl-runtime",
-  "version": "0.8.1",
+  "name": "@gigahatch/precompile-intl-runtime",
+  "version": "1.0.0",
   "description": "Runtime helpers to be used in translations precompiled by babel-plugin-precompile-intl",
-  "repository": "https://github.com/cibernox/precompile-intl-runtime",
+  "repository": "https://github.com/gigahatch/precompile-intl-runtime",
   "author": {
-    "name": "Miguel Camba",
-    "email": "miguel.camba@gmail.com"
+    "name": "Gigahatch",
+    "email": "info@gigahatch.ch"
   },
   "license": "MIT",
   "scripts": {
