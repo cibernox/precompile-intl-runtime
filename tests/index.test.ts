@@ -11,7 +11,7 @@ import {
   dictionary,
   locales,
   init,
-  format,
+  __t as format,
   time,
   date,
   number,
