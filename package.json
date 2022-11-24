@@ -1,6 +1,6 @@
 {
   "name": "@gigahatch/precompile-intl-runtime",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Runtime helpers to be used in translations precompiled by babel-plugin-precompile-intl",
   "repository": "https://github.com/gigahatch/precompile-intl-runtime",
   "author": {
