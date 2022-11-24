@@ -1,2 +1,8 @@
 tsconfig.json
 src
+tsconfig-cjs.json
+tests
+jest.config.js
+babel.config.js
+.github
+.vscode

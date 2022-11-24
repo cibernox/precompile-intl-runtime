@@ -28,9 +28,7 @@ import {
 import { IntlFormatterOptions } from './types';
 export {
   formatMessage,
-  $format as format,
-  $format as _,
-  $format as t,
+  $format as __t,
   $formatDate as date,
   $formatNumber as number,
   $formatTime as time,
@@ -81,3 +79,5 @@ export function __date(value: Date, format = "short"): string {
 export function __time(value: Date, format = "short"): string {
   return formatTime(getCurrentLocale(), value, { format });
 }
+
+export { TypedFormat } from "./types";

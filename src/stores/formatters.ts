@@ -6,6 +6,7 @@ import {
   DateFormatter,
   NumberFormatter,
   JsonGetter,
+  TypedFormat,
 } from '../types/index'
 import { lookup } from '../includes/lookup'
 import { hasLocaleQueue } from '../includes/loaderQueue'
@@ -79,7 +80,7 @@ export const formatNumber: NumberFormatter = (currentLocale, n, options) => {
   return getNumberFormatter({ locale, ...options }).format(n)
 }
 
-export const $format = /*@__PURE__*/derived([$locale, $dictionary], ([currentLocale]) => formatMessage.bind(null, currentLocale));
+export const $format: TypedFormat = /*@__PURE__*/derived([$locale, $dictionary], ([currentLocale]) => formatMessage.bind(null, currentLocale));
 export const $formatTime = /*@__PURE__*/derived([$locale], ([currentLocale]) => formatTime.bind(null, currentLocale));
 export const $formatDate = /*@__PURE__*/derived([$locale], ([currentLocale]) => formatDate.bind(null, currentLocale));
 export const $formatNumber = /*@__PURE__*/derived([$locale], ([currentLocale]) => formatNumber.bind(null, currentLocale));

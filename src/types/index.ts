@@ -1,3 +1,5 @@
+import { Readable } from "svelte/store";
+
 interface Formats {
     number: Record<string, Intl.NumberFormatOptions>;
     date: Record<string, Intl.DateTimeFormatOptions>;
@@ -18,8 +20,8 @@ export interface MessageObject {
   values?: Record<string, string | number | Date>
 }
 
-export interface MessageObjectWithId extends MessageObject {
-  id: string
+export interface MessageObjectWithId<T = string> extends MessageObject {
+  id: T
 }
 
 export type JsonGetter = (
@@ -27,9 +29,9 @@ export type JsonGetter = (
   locale?: string
 ) => any
 
-export type MessageFormatter = (
+export type MessageFormatter<T = string> = (
   currentLocale: string,
-  id: string | MessageObjectWithId,
+  id: T | MessageObjectWithId<T>,
   options?: MessageObject
 ) => string
 
@@ -77,3 +79,5 @@ export interface ConfigureOptions {
   formats?: Partial<Formats>
   loadingDelay?: number
 }
+
+export type TypedFormat<T = string> = Readable<(id: T | MessageObjectWithId<T>, options?: MessageObject | undefined) => string>;
