@@ -44,9 +44,9 @@ export const formatMessage: MessageFormatter = (
   }
   if (typeof message === "function") {
     return message(
-      ...Object.keys(options.values || {})
+      ...Object.keys(values || {})
         .sort()
-        .map((k) => (options.values || {})[k])
+        .map((k) => (values || {})[k])
     );
   }
 
