@@ -1,5 +1,5 @@
-import { getMessageFromDictionary } from '../stores/dictionary';
-import { getPossibleLocales } from './utils';
+import { getMessageFromDictionary } from "../stores/dictionary";
+import { getPossibleLocales } from "./utils";
 
 export const lookupCache: {
   [locale: string]: {

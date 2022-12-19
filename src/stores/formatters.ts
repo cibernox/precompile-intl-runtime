@@ -7,22 +7,30 @@ import {
   NumberFormatter,
   JsonGetter,
   TypedFormat,
-} from '../types/index'
-import { lookup } from '../includes/lookup'
-import { hasLocaleQueue } from '../includes/loaderQueue'
+} from "../types/index";
+import { lookup } from "../includes/lookup";
+import { hasLocaleQueue } from "../includes/loaderQueue";
 import {
   getTimeFormatter,
   getDateFormatter,
   getNumberFormatter,
-} from '../includes/formatters'
-import { getOptions, getCurrentLocale, getPossibleLocales } from '../includes/utils';
+} from "../includes/formatters";
+import {
+  getOptions,
+  getCurrentLocale,
+  getPossibleLocales,
+} from "../includes/utils";
 
-import { $dictionary } from './dictionary'
-import { $locale } from './locale'
+import { $dictionary } from "./dictionary";
+import { $locale } from "./locale";
 
-export const formatMessage: MessageFormatter = (currentLocale, optionsOrId, maybeOptions= {}) => {
-  const id = typeof optionsOrId === 'string' ? optionsOrId : optionsOrId.id;
-  const options = typeof optionsOrId === 'string' ? maybeOptions : optionsOrId;
+export const formatMessage: MessageFormatter = (
+  currentLocale,
+  optionsOrId,
+  maybeOptions = {}
+) => {
+  const id = typeof optionsOrId === "string" ? optionsOrId : optionsOrId.id;
+  const options = typeof optionsOrId === "string" ? maybeOptions : optionsOrId;
 
   const {
     values,
@@ -32,29 +40,33 @@ export const formatMessage: MessageFormatter = (currentLocale, optionsOrId, mayb
 
   if (locale == null) {
     throw new Error(
-      '[svelte-intl-precompile] Cannot format a message without first setting the initial locale.',
+      "[svelte-intl-precompile] Cannot format a message without first setting the initial locale."
     );
   }
 
   let message = lookup(id, locale);
 
-  if (typeof message === 'string') {
+  if (typeof message === "string") {
     return message;
   }
-  if (typeof message === 'function') {
-    return message(...Object.keys(options.values || {}).sort().map(k => (options.values || {})[k]));
+  if (typeof message === "function") {
+    return message(
+      ...Object.keys(options.values || {})
+        .sort()
+        .map((k) => (options.values || {})[k])
+    );
   }
 
   if (getOptions().warnOnMissingMessages) {
     // istanbul ignore next
     console.warn(
       `[svelte-intl-precompile] The message "${id}" was not found in "${getPossibleLocales(
-        locale,
+        locale
       ).join('", "')}".${
         hasLocaleQueue(getCurrentLocale())
           ? `\n\nNote: there are at least one loader still registered to this locale that wasn't executed.`
-          : ''
-      }`,
+          : ""
+      }`
     );
   }
   return defaultValue || id;
@@ -63,25 +75,38 @@ export const formatMessage: MessageFormatter = (currentLocale, optionsOrId, mayb
 export const getJSON: JsonGetter = (id, locale) => {
   locale = locale || getCurrentLocale();
   return lookup(id, locale) || id;
-}
+};
 
 export const formatTime: TimeFormatter = (currentLocale, t, options) => {
   const locale = currentLocale || getCurrentLocale();
-  return getTimeFormatter({ locale, ...options }).format(t)
-}
+  return getTimeFormatter({ locale, ...options }).format(t);
+};
 
 export const formatDate: DateFormatter = (currentLocale, d, options) => {
   const locale = currentLocale || getCurrentLocale();
   return getDateFormatter({ locale, ...options }).format(d);
-}
+};
 
 export const formatNumber: NumberFormatter = (currentLocale, n, options) => {
   const locale = currentLocale || getCurrentLocale();
-  return getNumberFormatter({ locale, ...options }).format(n)
-}
+  return getNumberFormatter({ locale, ...options }).format(n);
+};
 
-export const $format: TypedFormat = /*@__PURE__*/derived([$locale, $dictionary], ([currentLocale]) => formatMessage.bind(null, currentLocale));
-export const $formatTime = /*@__PURE__*/derived([$locale], ([currentLocale]) => formatTime.bind(null, currentLocale));
-export const $formatDate = /*@__PURE__*/derived([$locale], ([currentLocale]) => formatDate.bind(null, currentLocale));
-export const $formatNumber = /*@__PURE__*/derived([$locale], ([currentLocale]) => formatNumber.bind(null, currentLocale));
-export const $getJSON = /*@__PURE__*/derived([$locale, $dictionary], () => getJSON);
+export const $format: TypedFormat = /*@__PURE__*/ derived(
+  [$locale, $dictionary],
+  ([currentLocale]) => formatMessage.bind(null, currentLocale)
+);
+export const $formatTime = /*@__PURE__*/ derived([$locale], ([currentLocale]) =>
+  formatTime.bind(null, currentLocale)
+);
+export const $formatDate = /*@__PURE__*/ derived([$locale], ([currentLocale]) =>
+  formatDate.bind(null, currentLocale)
+);
+export const $formatNumber = /*@__PURE__*/ derived(
+  [$locale],
+  ([currentLocale]) => formatNumber.bind(null, currentLocale)
+);
+export const $getJSON = /*@__PURE__*/ derived(
+  [$locale, $dictionary],
+  () => getJSON
+);

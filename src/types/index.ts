@@ -1,69 +1,66 @@
 import { Readable } from "svelte/store";
 
 interface Formats {
-    number: Record<string, Intl.NumberFormatOptions>;
-    date: Record<string, Intl.DateTimeFormatOptions>;
-    time: Record<string, Intl.DateTimeFormatOptions>;
+  number: Record<string, Intl.NumberFormatOptions>;
+  date: Record<string, Intl.DateTimeFormatOptions>;
+  time: Record<string, Intl.DateTimeFormatOptions>;
 }
 
 export interface DeepDictionary {
-  [key: string]: DeepDictionary | string | string[]
+  [key: string]: DeepDictionary | string | string[];
 }
-export type LocaleDictionaryValue = string | ((...args: any[]) => string)
+export type LocaleDictionaryValue = string | ((...args: any[]) => string);
 export type LocaleDictionary = Record<string, LocaleDictionaryValue>;
-export type Dictionary = Record<string, LocaleDictionary>
+export type Dictionary = Record<string, LocaleDictionary>;
 
 export interface MessageObject {
-  locale?: string
-  format?: string
-  default?: string
-  values?: Record<string, string | number | Date>
+  locale?: string;
+  format?: string;
+  default?: string;
+  values?: Record<string, string | number | Date>;
 }
 
 export interface MessageObjectWithId<T = string> extends MessageObject {
-  id: T
+  id: T;
 }
 
-export type JsonGetter = (
-  id: string,
-  locale?: string
-) => any
+export type JsonGetter = (id: string, locale?: string) => any;
 
 export type MessageFormatter<T = string> = (
   currentLocale: string,
   id: T | MessageObjectWithId<T>,
   options?: MessageObject
-) => string
+) => string;
 
 export type TimeFormatter = (
   currentLocale: string,
   d: Date | number,
   options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>
-) => string
+) => string;
 
 export type DateFormatter = (
   currentLocale: string,
   d: Date | number,
   options?: IntlFormatterOptions<Intl.DateTimeFormatOptions>
-) => string
+) => string;
 
 export type NumberFormatter = (
   currentLocale: string,
   d: number,
   options?: IntlFormatterOptions<Intl.NumberFormatOptions>
-) => string
+) => string;
 
 export type IntlFormatterOptions<T> = T & {
-  format?: string
-  locale?: string
-}
+  format?: string;
+  locale?: string;
+};
 
 export interface MemoizedIntlFormatter<T, U> {
-  (options?: IntlFormatterOptions<U>): T
+  (options?: IntlFormatterOptions<U>): T;
 }
 
 export interface MessagesLoader {
-  (): Promise<any>
+  (): Promise<any>;
 }
 export interface GetClientLocaleOptions {
   navigator?: boolean;
@@ -74,10 +71,15 @@ export interface GetClientLocaleOptions {
 }
 
 export interface ConfigureOptions {
-  fallbackLocale: string
-  initialLocale?: string
-  formats?: Partial<Formats>
-  loadingDelay?: number
+  fallbackLocale: string;
+  initialLocale?: string;
+  formats?: Partial<Formats>;
+  loadingDelay?: number;
 }
 
-export type TypedFormat<T = string> = Readable<(id: T | MessageObjectWithId<T>, options?: MessageObject | undefined) => string>;
+export type TypedFormat<T = string> = Readable<
+  (
+    id: T | MessageObjectWithId<T>,
+    options?: MessageObject | undefined
+  ) => string
+>;

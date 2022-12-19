@@ -1,8 +1,8 @@
 const getFromQueryString = (queryString: string, key: string) => {
-  const keyVal = queryString.split('&').find((i) => i.indexOf(`${key}=`) === 0);
+  const keyVal = queryString.split("&").find((i) => i.indexOf(`${key}=`) === 0);
 
   if (keyVal) {
-    return keyVal.split('=').pop() || null;
+    return keyVal.split("=").pop() || null;
   }
 
   return null;
@@ -20,21 +20,21 @@ const getFirstMatch = (base: string, pattern: RegExp) => {
 
 export const getLocaleFromHostname = (hostname: RegExp) => {
   // istanbul ignore next
-  if (typeof window === 'undefined') return null;
+  if (typeof window === "undefined") return null;
 
   return getFirstMatch(window.location.hostname, hostname);
 };
 
 export const getLocaleFromPathname = (pathname: RegExp) => {
   // istanbul ignore next
-  if (typeof window === 'undefined') return null;
+  if (typeof window === "undefined") return null;
 
   return getFirstMatch(window.location.pathname, pathname);
 };
 
 export const getLocaleFromNavigator = (ssrDefault?: string) => {
   // istanbul ignore next
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return ssrDefault || null;
   }
 
@@ -43,52 +43,62 @@ export const getLocaleFromNavigator = (ssrDefault?: string) => {
 
 export const getLocaleFromQueryString = (search: string) => {
   // istanbul ignore next
-  if (typeof window === 'undefined') return null;
+  if (typeof window === "undefined") return null;
 
   return getFromQueryString(window.location.search.substr(1), search);
 };
 
 export const getLocaleFromHash = (hash: string) => {
   // istanbul ignore next
-  if (typeof window === 'undefined') return null;
+  if (typeof window === "undefined") return null;
 
   return getFromQueryString(window.location.hash.substr(1), hash);
 };
 
-export const getLocaleFromAcceptLanguageHeader = (header: string | null, availableLocales?: string[]): string | undefined => {
+export const getLocaleFromAcceptLanguageHeader = (
+  header: string | null,
+  availableLocales?: string[]
+): string | undefined => {
   // If header is null (i.e. does not exist) the fallbackLocale should be used
-  if (!header)
-    return undefined;
+  if (!header) return undefined;
 
   // Parse Accept-Language header
   const locales = header
-      .split(',')
-      .map(locale => locale.trim())
-      .map(locale => {
-        const directives = locale.split(';q=');
-        return {
-          locale: directives[0],
-          quality: parseFloat(directives[1]) || 1.0
-        };
-      })
-      .sort((a, b) => b.quality - a.quality);
+    .split(",")
+    .map((locale) => locale.trim())
+    .map((locale) => {
+      const directives = locale.split(";q=");
+      return {
+        locale: directives[0],
+        quality: parseFloat(directives[1]) || 1.0,
+      };
+    })
+    .sort((a, b) => b.quality - a.quality);
 
   // If availableLocales is not defined return the first language from header
   if (!availableLocales || availableLocales.length === 0)
     return locales[0].locale;
 
-  locales.forEach(l => l.locale = l.locale.toLowerCase());
+  locales.forEach((l) => (l.locale = l.locale.toLowerCase()));
 
-  let firstAvailableBaseMatch: {match: string; base: string} | undefined;
+  let firstAvailableBaseMatch: { match: string; base: string } | undefined;
 
   // Check languages
   for (const locale of locales) {
-    if (firstAvailableBaseMatch && !locale.locale.toLowerCase().startsWith(`${firstAvailableBaseMatch.base}-`)) {
+    if (
+      firstAvailableBaseMatch &&
+      !locale.locale
+        .toLowerCase()
+        .startsWith(`${firstAvailableBaseMatch.base}-`)
+    ) {
       continue;
     }
 
     // Full match
-    const fullMatch = getArrayElementCaseInsensitive(availableLocales, locale.locale);
+    const fullMatch = getArrayElementCaseInsensitive(
+      availableLocales,
+      locale.locale
+    );
     if (fullMatch) {
       return fullMatch;
     }
@@ -98,20 +108,23 @@ export const getLocaleFromAcceptLanguageHeader = (header: string | null, availab
     }
 
     // header base match
-    const baseMatch = getArrayElementCaseInsensitive(availableLocales, locale.locale.split('-')[0]);
+    const baseMatch = getArrayElementCaseInsensitive(
+      availableLocales,
+      locale.locale.split("-")[0]
+    );
     if (baseMatch) {
       return baseMatch;
     }
 
     // available base match
     for (const availableLocale of availableLocales) {
-      const availableBase = availableLocale.split('-')[0];
+      const availableBase = availableLocale.split("-")[0];
       if (availableBase.toLowerCase() === locale.locale) {
         // Remember base match to check if full match with same base exists
         firstAvailableBaseMatch = {
           match: availableLocale,
-          base: locale.locale
-        }
+          base: locale.locale,
+        };
         break;
       }
     }
@@ -123,9 +136,12 @@ export const getLocaleFromAcceptLanguageHeader = (header: string | null, availab
 
   // If no match found use fallbackLocale
   return undefined;
-}
+};
 
-function getArrayElementCaseInsensitive(array: string[], searchElement: string): string | undefined {
+function getArrayElementCaseInsensitive(
+  array: string[],
+  searchElement: string
+): string | undefined {
   searchElement = searchElement.toLowerCase();
   for (const element of array) {
     if (element.toLowerCase() === searchElement) {
