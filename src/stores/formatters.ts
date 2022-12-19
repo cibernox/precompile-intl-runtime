@@ -1,5 +1,4 @@
 import { derived } from "svelte/store";
-
 import {
   MessageFormatter,
   TimeFormatter,
@@ -9,18 +8,12 @@ import {
   TypedFormat,
 } from "../types/index";
 import { lookup } from "../includes/lookup";
-import { hasLocaleQueue } from "../includes/loaderQueue";
 import {
   getTimeFormatter,
   getDateFormatter,
   getNumberFormatter,
 } from "../includes/formatters";
-import {
-  getOptions,
-  getCurrentLocale,
-  getPossibleLocales,
-} from "../includes/utils";
-
+import { getCurrentLocale } from "../includes/utils";
 import { $dictionary } from "./dictionary";
 import { $locale } from "./locale";
 
