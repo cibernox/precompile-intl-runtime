@@ -2,14 +2,12 @@ interface Options {
   fallbackLocale: string;
   initialLocale: string;
   loadingDelay: number;
-  warnOnMissingMessages: boolean;
 }
 
 const defaultOptions: Options = {
   fallbackLocale: "",
   initialLocale: "",
   loadingDelay: 200,
-  warnOnMissingMessages: true,
 };
 
 const options: Options = defaultOptions;

@@ -57,18 +57,6 @@ export const formatMessage: MessageFormatter = (
     );
   }
 
-  if (getOptions().warnOnMissingMessages) {
-    // istanbul ignore next
-    console.warn(
-      `[svelte-intl-precompile] The message "${id}" was not found in "${getPossibleLocales(
-        locale
-      ).join('", "')}".${
-        hasLocaleQueue(getCurrentLocale())
-          ? `\n\nNote: there are at least one loader still registered to this locale that wasn't executed.`
-          : ""
-      }`
-    );
-  }
   return defaultValue || id;
 };
 
