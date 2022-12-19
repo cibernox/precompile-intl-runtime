@@ -1,11 +1,5 @@
 import { Readable } from "svelte/store";
 
-interface Formats {
-  number: Record<string, Intl.NumberFormatOptions>;
-  date: Record<string, Intl.DateTimeFormatOptions>;
-  time: Record<string, Intl.DateTimeFormatOptions>;
-}
-
 export interface DeepDictionary {
   [key: string]: DeepDictionary | string | string[];
 }
@@ -73,7 +67,6 @@ export interface GetClientLocaleOptions {
 export interface ConfigureOptions {
   fallbackLocale: string;
   initialLocale?: string;
-  formats?: Partial<Formats>;
   loadingDelay?: number;
 }
 

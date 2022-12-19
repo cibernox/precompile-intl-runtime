@@ -1,20 +1,59 @@
 import { MemoizedIntlFormatter } from "../types/index";
-import { getOptions, getCurrentLocale } from "./utils";
+import { getCurrentLocale } from "./utils";
 import { monadicMemoize } from "./memoize";
 
-const getIntlFormatterOptions = (
-  type: "time" | "number" | "date",
-  name: string
-): any => {
-  const { formats } = getOptions();
-  if (type in formats && name in formats[type]) {
-    return formats[type][name];
-  }
-
-  throw new Error(
-    `[precompile-intl-runtime] Unknown "${name}" ${type} format.`
-  );
+const defaultNumber: Record<string, Intl.NumberFormatOptions> = {
+  scientific: { notation: "scientific" },
+  engineering: { notation: "engineering" },
+  compactLong: { notation: "compact", compactDisplay: "long" },
+  compactShort: { notation: "compact", compactDisplay: "short" },
 };
+
+const defaultDate: Record<string, Intl.DateTimeFormatOptions> = {
+  short: { month: "numeric", day: "numeric", year: "2-digit" },
+  medium: { month: "short", day: "numeric", year: "numeric" },
+  long: { month: "long", day: "numeric", year: "numeric" },
+  full: { weekday: "long", month: "long", day: "numeric", year: "numeric" },
+};
+
+const defaultTime: Record<string, Intl.DateTimeFormatOptions> = {
+  short: { hour: "numeric", minute: "numeric" },
+  medium: { hour: "numeric", minute: "numeric", second: "numeric" },
+  long: {
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZoneName: "short",
+  },
+  full: {
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZoneName: "short",
+  },
+};
+
+export const setCustomNumberFormat = (
+  f: Record<string, Intl.NumberFormatOptions>
+) => {
+  customNumber = f;
+};
+
+export const setCustomDateFormat = (
+  f: Record<string, Intl.DateTimeFormatOptions>
+) => {
+  customDate = f;
+};
+
+export const setCustomTimeFormat = (
+  f: Record<string, Intl.DateTimeFormatOptions>
+) => {
+  customTime = f;
+};
+
+let customNumber: Record<string, Intl.NumberFormatOptions> = {};
+let customDate: Record<string, Intl.DateTimeFormatOptions> = {};
+let customTime: Record<string, Intl.DateTimeFormatOptions> = {};
 
 export const getNumberFormatter: MemoizedIntlFormatter<
   Intl.NumberFormat,
@@ -30,7 +69,7 @@ export const getNumberFormatter: MemoizedIntlFormatter<
   if (typeof format === "string") {
     return new Intl.NumberFormat(
       locale,
-      getIntlFormatterOptions("number", format)
+      Object.assign({}, defaultNumber, customNumber)[format]
     );
   } else {
     return new Intl.NumberFormat(locale, options);
@@ -48,10 +87,12 @@ export const getDateFormatter: MemoizedIntlFormatter<
     );
   }
 
+  const formats = Object.assign({}, defaultDate, customDate);
+
   if (format) {
-    options = getIntlFormatterOptions("date", format);
+    options = formats[format];
   } else if (Object.keys(options).length === 0) {
-    options = getIntlFormatterOptions("date", "short");
+    options = formats["short"];
   }
 
   return new Intl.DateTimeFormat(locale, options);
@@ -68,10 +109,12 @@ export const getTimeFormatter: MemoizedIntlFormatter<
     );
   }
 
+  const formats = Object.assign({}, defaultTime, customTime);
+
   if (format) {
-    options = getIntlFormatterOptions("time", format);
+    options = formats[format];
   } else if (Object.keys(options).length === 0) {
-    options = getIntlFormatterOptions("time", "short");
+    options = formats["short"];
   }
 
   return new Intl.DateTimeFormat(locale, options);

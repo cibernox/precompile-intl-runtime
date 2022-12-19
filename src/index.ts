@@ -36,6 +36,9 @@ export {
   getDateFormatter,
   getNumberFormatter,
   getTimeFormatter,
+  setCustomDateFormat,
+  setCustomNumberFormat,
+  setCustomTimeFormat,
 } from "./includes/formatters";
 
 type PluralRule = "z" | "o" | "t" | "f" | "m" | "h" | number;
