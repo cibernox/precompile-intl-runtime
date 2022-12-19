@@ -13,6 +13,12 @@
     "test": "TZ=utc jest test",
     "prepublish": "npm run build"
   },
+  "exports": {
+    ".": {
+      "import": "./dist/modules/index.js",
+      "types": "./dist/modules/index.d.ts"
+    }
+  },
   "main": "dist/commonjs/index.js",
   "module": "dist/modules/index.js",
   "types": "dist/modules/index.d.ts",
