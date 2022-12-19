@@ -20,12 +20,6 @@ export interface MessageObjectWithId<T = string> extends MessageObject {
 
 export type JsonGetter = (id: string, locale?: string) => any;
 
-export type MessageFormatter<T = string> = (
-  currentLocale: string,
-  id: T | MessageObjectWithId<T>,
-  options?: MessageObject
-) => string;
-
 export type TimeFormatter = (
   currentLocale: string,
   d: Date | number,
@@ -71,8 +65,5 @@ export interface ConfigureOptions {
 }
 
 export type TypedFormat<T = string> = Readable<
-  (
-    id: T | MessageObjectWithId<T>,
-    options?: MessageObject | undefined
-  ) => string
+  (id: T, options?: MessageObject | undefined) => string
 >;
