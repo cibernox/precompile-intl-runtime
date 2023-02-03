@@ -69,8 +69,8 @@ export function __select(value: any, opts: Record<any, string>): string {
   return opts[value] || opts['other'] || '';
 }
 
-export function __number(value: number, format?: string): string {
-  return formatNumber(getCurrentLocale(), value, { format });
+export function __number(value: number, format?: string | object): string {
+  return formatNumber(getCurrentLocale(), value, typeof format === 'string' ? { format } : format);
 }
 
 export function __date(value: Date, format = "short"): string {
