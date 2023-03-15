@@ -268,6 +268,32 @@ describe("json", function() {
     });
     unsubscribe()
   });
+
+  it('retrieves json segment of messages that are nested', () => {
+    addMessages("en-US", {
+      nested: {
+        deep: {
+          deeper: 42
+        }
+      },
+    });
+
+    const unsubscribe = json.subscribe(j => {
+      expect(j("nested.deep.deeper")).toStrictEqual(42);
+    });
+    unsubscribe();
+  });
+
+  it('retrieves json data of any type', () => {
+    addMessages("en-US", {
+      arr: [42]
+    });
+
+    const unsubscribe = json.subscribe(j => {
+      expect(j("arr")).toStrictEqual([42]);
+    });
+    unsubscribe();
+  });
 });
 
 describe("time", function() {
