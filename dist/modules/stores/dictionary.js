@@ -26,6 +26,7 @@ export function getMessageFromDictionary(locale, id) {
             }
             tmpDict = tmpDict[ids[i]];
         }
+        return tmpDict;
     }
     return null;
 }
