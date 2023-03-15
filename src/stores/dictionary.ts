@@ -34,6 +34,7 @@ export function getMessageFromDictionary(locale: string, id: string) {
       }
       tmpDict = tmpDict[ids[i]];
     }
+    return tmpDict;
   }
   return null
 }
