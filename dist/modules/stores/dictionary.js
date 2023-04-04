@@ -22,7 +22,7 @@ export function getMessageFromDictionary(locale, id) {
         let tmpDict = localeDictionary;
         for (let i = 0; i < ids.length; i++) {
             if (typeof tmpDict[ids[i]] !== 'object') {
-                return tmpDict[ids[i]] || null;
+                return tmpDict[ids[i]] ?? null;
             }
             tmpDict = tmpDict[ids[i]];
         }

@@ -28,7 +28,7 @@ export const lookup = (path: string, refLocale: string) => {
     const locale = locales[i];
     const message = getMessageFromDictionary(locale, path);
 
-    if (message) {
+    if (message !== null) {
       // Used the requested locale as the cache key
       // Ex: { en: { title: "Title" }}
       // lookup('title', 'en-GB') should cache with 'en-GB' instead of 'en'
