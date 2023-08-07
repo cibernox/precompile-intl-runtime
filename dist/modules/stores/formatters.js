@@ -1,10 +1,10 @@
 import { derived } from "svelte/store";
-import { lookup } from '../includes/lookup';
-import { hasLocaleQueue } from '../includes/loaderQueue';
-import { getTimeFormatter, getDateFormatter, getNumberFormatter, } from '../includes/formatters';
-import { getOptions, getCurrentLocale, getPossibleLocales } from '../includes/utils';
-import { $dictionary } from './dictionary';
-import { $locale } from './locale';
+import { lookup } from '../includes/lookup.js';
+import { hasLocaleQueue } from '../includes/loaderQueue.js';
+import { getTimeFormatter, getDateFormatter, getNumberFormatter, } from '../includes/formatters.js';
+import { getOptions, getCurrentLocale, getPossibleLocales } from '../includes/utils.js';
+import { $dictionary } from './dictionary.js';
+import { $locale } from './locale.js';
 export const formatMessage = (currentLocale, optionsOrId, maybeOptions = {}) => {
     const id = typeof optionsOrId === 'string' ? optionsOrId : optionsOrId.id;
     const options = typeof optionsOrId === 'string' ? maybeOptions : optionsOrId;

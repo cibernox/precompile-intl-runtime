@@ -1,4 +1,4 @@
-import { GetClientLocaleOptions } from "../types/index";
+import { GetClientLocaleOptions } from "../types/index.js";
 interface Formats {
   number: Record<string, any>
   date: Record<string, any>

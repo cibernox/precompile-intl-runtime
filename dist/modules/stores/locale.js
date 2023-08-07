@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
-import { flush, hasLocaleQueue } from '../includes/loaderQueue';
-import { getCurrentLocale, setCurrentLocale } from '../includes/utils';
-import { getClosestAvailableLocale } from './dictionary';
+import { flush, hasLocaleQueue } from '../includes/loaderQueue.js';
+import { getCurrentLocale, setCurrentLocale } from '../includes/utils.js';
+import { getClosestAvailableLocale } from './dictionary.js';
 const $locale = writable('');
 $locale.subscribe((newLocale) => {
     setCurrentLocale(newLocale);
