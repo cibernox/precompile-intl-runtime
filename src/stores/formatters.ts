@@ -6,18 +6,18 @@ import {
   DateFormatter,
   NumberFormatter,
   JsonGetter,
-} from '../types/index'
-import { lookup } from '../includes/lookup'
-import { hasLocaleQueue } from '../includes/loaderQueue'
+} from '../types/index.js'
+import { lookup } from '../includes/lookup.js'
+import { hasLocaleQueue } from '../includes/loaderQueue.js'
 import {
   getTimeFormatter,
   getDateFormatter,
   getNumberFormatter,
-} from '../includes/formatters'
-import { getOptions, getCurrentLocale, getPossibleLocales } from '../includes/utils';
+} from '../includes/formatters.js'
+import { getOptions, getCurrentLocale, getPossibleLocales } from '../includes/utils.js';
 
-import { $dictionary } from './dictionary'
-import { $locale } from './locale'
+import { $dictionary } from './dictionary.js'
+import { $locale } from './locale.js'
 
 export const formatMessage: MessageFormatter = (currentLocale, optionsOrId, maybeOptions= {}) => {
   const id = typeof optionsOrId === 'string' ? optionsOrId : optionsOrId.id;

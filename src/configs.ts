@@ -1,6 +1,6 @@
-import { ConfigureOptions } from './types/index'
-import { $locale } from './stores/locale';
-import { getOptions } from './includes/utils';
+import { ConfigureOptions } from './types/index.js'
+import { $locale } from './stores/locale.js';
+import { getOptions } from './includes/utils.js';
 
 export function init(opts: ConfigureOptions) {
   const { formats, ...rest } = opts

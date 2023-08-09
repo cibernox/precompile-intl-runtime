@@ -1,6 +1,6 @@
-import { hasLocaleDictionary, $dictionary, addMessages, } from '../stores/dictionary';
-import { getPossibleLocales, getOptions } from '../includes/utils';
-import { $isLoading } from '../stores/loading';
+import { hasLocaleDictionary, $dictionary, addMessages, } from '../stores/dictionary.js';
+import { getPossibleLocales, getOptions } from '../includes/utils.js';
+import { $isLoading } from '../stores/loading.js';
 const loaderQueue = {};
 export function resetQueues() {
     Object.keys(loaderQueue).forEach(key => {

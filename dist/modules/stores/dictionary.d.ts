@@ -1,4 +1,4 @@
-import { LocaleDictionary, DeepDictionary, Dictionary } from '../types/index';
+import { LocaleDictionary, DeepDictionary, Dictionary } from '../types/index.js';
 declare const $dictionary: import("svelte/store").Writable<Dictionary>;
 export declare function getLocaleDictionary(locale: string): LocaleDictionary;
 export declare function getDictionary(): Dictionary;

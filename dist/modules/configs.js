@@ -1,5 +1,5 @@
-import { $locale } from './stores/locale';
-import { getOptions } from './includes/utils';
+import { $locale } from './stores/locale.js';
+import { getOptions } from './includes/utils.js';
 export function init(opts) {
     const { formats, ...rest } = opts;
     const initialLocale = opts.initialLocale || opts.fallbackLocale;

@@ -1,5 +1,5 @@
-import { getOptions, getCurrentLocale } from './utils';
-import { monadicMemoize } from './memoize';
+import { getOptions, getCurrentLocale } from './utils.js';
+import { monadicMemoize } from './memoize.js';
 const getIntlFormatterOptions = (type, name) => {
     const { formats } = getOptions();
     if (type in formats && name in formats[type]) {

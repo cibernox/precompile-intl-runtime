@@ -1,8 +1,8 @@
 // @ts-ignore
 import { writable, derived } from 'svelte/store';
 import { LocaleDictionary, LocaleDictionaryValue, DeepDictionary, Dictionary }
-  from '../types/index';
-import { getPossibleLocales } from '../includes/utils';
+from '../types/index.js';
+import { getPossibleLocales } from '../includes/utils.js';
 
 let dictionary: Dictionary
 const $dictionary = writable<Dictionary>({})
