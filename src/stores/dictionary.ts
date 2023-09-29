@@ -30,7 +30,7 @@ export function getMessageFromDictionary(locale: string, id: string) {
     let tmpDict: any = localeDictionary
     for (let i = 0; i < ids.length; i++) {
       if (typeof tmpDict[ids[i]] !== 'object') {
-        return (tmpDict[ids[i]] as LocaleDictionaryValue) || null
+        return (tmpDict[ids[i]] as LocaleDictionaryValue) ?? null
       }
       tmpDict = tmpDict[ids[i]];
     }
