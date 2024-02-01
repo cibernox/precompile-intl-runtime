@@ -65,7 +65,7 @@ export const getLocaleFromAcceptLanguageHeader = (header: string | null, availab
       .split(',')
       .map(locale => locale.trim())
       .map(locale => {
-        const directives = locale.split(';q=');
+        const directives = locale.split(/; ?q=/);
         return {
           locale: directives[0],
           quality: parseFloat(directives[1]) || 1.0
